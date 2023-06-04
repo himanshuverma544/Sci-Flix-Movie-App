@@ -2,7 +2,7 @@ import './App.css';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-toastify/dist/ReactToastify.css";
 
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import Layout from './pages/Layout';
 import Home from './pages/Home';
 import MoviesList from './pages/MoviesList';
@@ -11,7 +11,7 @@ import SignInSignUp from './pages/SignInSignUp';
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter basename=''>
       <Routes>
         <Route path="/" element={<Layout/>}>
           <Route index element={<Home/>}/>
@@ -20,7 +20,7 @@ function App() {
           <Route path="*" element={<NoPage/>}/>
         </Route>
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
