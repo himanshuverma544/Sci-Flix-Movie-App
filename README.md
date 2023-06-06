@@ -15,6 +15,7 @@ Developed a user-friendly Movie App with React/Redux, delivering an immersive br
 
 # Libraries Used
 - react-redux
+- @reduxjs/toolkit
 - react-router-dom
 - reactstrap
 - bootstrap
