@@ -12,5 +12,17 @@ Developed a user-friendly Movie App with React/Redux, delivering an immersive br
 # API Used
 - Created Mock API for popular science fiction movies using <a href="https://www.npoint.io/" target="_blank">npoint.io</a>
 
+# Libraries Used
+- react-redux
+- react-router-dom
+- reactstrap
+- bootstrap
+- react-select
+- react-icons
+- react-toastify
+- axios
+- uuid
+- gh-pages
+
 # Deployed On
 - GitHub Pages
