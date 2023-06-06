@@ -10,7 +10,7 @@ Developed a user-friendly Movie App with React/Redux, delivering an immersive br
 - React
 
 # API Used
-- Created Mock API for popular science fiction movies using <a href="npoint.io" target="_blank">npoint.io</a>
+- Created Mock API for popular science fiction movies using [npoint.io](https://www.npoint.io/)
 
 # Deployed On
 - GitHub Pages
