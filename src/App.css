@@ -131,7 +131,12 @@ footer {
 
 /* Modals */
 
-.the-image-modal, .the-video-modal, .the-description-modal, .the-edit-modal, .the-delete-modal, .the-comments-modal {
+.the-image-modal, 
+.the-video-modal, 
+.the-description-modal, 
+.the-edit-modal, 
+.the-delete-modal, 
+.the-comments-modal {
   display: flex;
   justify-content: center;
   align-items: center;
