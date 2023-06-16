@@ -36,6 +36,7 @@ const CommentsModal = ({commentReqDetails: { signedInUser: currentSignedInUser ,
   const [userComment, setUserComment] = useState("");
   const [actionOnComment, setActionOnComment] = useState(ADD_COMMENT);
   const userCommentNode = useRef(null);
+  const allUsersCommentsNode = useRef(null);
 
   const movieCommentDispatch = useDispatch();
 
@@ -102,6 +103,7 @@ const CommentsModal = ({commentReqDetails: { signedInUser: currentSignedInUser ,
             }
           }) 
         );
+        allUsersCommentsNode.current.scrollTo(0, 0);
         break;
 
       case EDIT_COMMENT:
@@ -132,7 +134,7 @@ const CommentsModal = ({commentReqDetails: { signedInUser: currentSignedInUser ,
       <div ref={commentsModalCommentsNode} className="comments-container">
         <h3 className="mt-3 ms-3">{`${movieName} (Comments)`}</h3>
         <hr/>
-        <div className="all-comments">
+        <div ref={allUsersCommentsNode} className="all-comments">
           <ul>
             {usersComments.map((_, index, arr) => {
               const { commentId, username: commentUsername, userComment } = reverseVal(index, arr);
@@ -147,7 +149,7 @@ const CommentsModal = ({commentReqDetails: { signedInUser: currentSignedInUser ,
                       && !commentUsername.includes(DEFAULT_USER.username)
                       ? capitalizeUsername(commentUsername) 
 
-                      : (currentSignedInUser === commentUsername      // current default user comment     
+                      : (currentSignedInUser === commentUsername      // current default signed in user comment     
                       ? REPRESENTING_YOU
                       : capitalizeUsername(DEFAULT_USER.username)))      // all default users comments
                     }
