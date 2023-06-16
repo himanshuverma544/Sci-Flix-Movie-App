@@ -11,17 +11,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { addComment, editComment } from "../../redux/moviesComments";
 
 import { DEFAULT_USER, REPRESENTING_YOU, ADD_COMMENT, EDIT_COMMENT } from "../../constants";
-import { reverseVal, removeUniqueKeyStr, capitalizeUsername } from "../../customFunctions";
+import { reverseVal, capitalizeUsername } from "../../customFunctions";
 
 
 const CommentsModal = ({commentReqDetails: { signedInUser: currentSignedInUser , movieName }, commentsModalCommentsNode, closeCommentsModal}) => {
   
 
-  const currentDefaultUser = sessionStorage.getItem("currentDefaultUser");
+  let currentDefaultUser = sessionStorage.getItem("currentDefaultUser");
 
   if (currentSignedInUser === DEFAULT_USER.username) {
     if (!currentDefaultUser) { 
-      currentSignedInUser = `${currentSignedInUser}-${getUniqueKey()}`;
+      currentSignedInUser = currentDefaultUser = `${currentSignedInUser}-${getUniqueKey()}`;
       sessionStorage.setItem("currentDefaultUser", currentSignedInUser);
     }
     else if (currentDefaultUser) {
@@ -139,14 +139,17 @@ const CommentsModal = ({commentReqDetails: { signedInUser: currentSignedInUser ,
               return (
                 <li key={commentId} data-id={commentId}>
                   <span className="comment-username ms-3 me-2">
-                    { removeUniqueKeyStr(currentSignedInUser) !== DEFAULT_USER.username 
-                      && removeUniqueKeyStr(commentUsername) !== DEFAULT_USER.username
+                    { !commentUsername.includes(DEFAULT_USER.username)     // current signed in user comment
+                      && currentSignedInUser === commentUsername
                       ? `${capitalizeUsername(commentUsername)} (${REPRESENTING_YOU})`
-                      : (currentSignedInUser === currentDefaultUser && currentSignedInUser !== commentUsername
+
+                      : (currentSignedInUser !== commentUsername      // signed in users comments
+                      && !commentUsername.includes(DEFAULT_USER.username)
                       ? capitalizeUsername(commentUsername) 
-                      : (currentSignedInUser === currentDefaultUser 
+
+                      : (currentSignedInUser === commentUsername      // current default user comment     
                       ? REPRESENTING_YOU
-                      : capitalizeUsername(DEFAULT_USER.username))) 
+                      : capitalizeUsername(DEFAULT_USER.username)))      // all default users comments
                     }
                   </span>
                   <span className="user-comment">{userComment}</span>
