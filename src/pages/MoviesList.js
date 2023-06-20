@@ -14,7 +14,6 @@ import MoviesGridView from"../components/MoviesGridView";
 
 const MoviesList = () => {
 
-  
   const movies = useSelector(state => {
 
     let defaultUserMoviesLocal = localStorage.getItem(DEFAULT_USER.username); 
