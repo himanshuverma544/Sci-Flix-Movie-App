@@ -3,27 +3,46 @@ import Select from "react-select";
 import { AiOutlineSearch } from "react-icons/ai";
 import { BiSortAlt2 } from "react-icons/bi";
 
-import { useState, useCallback } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 
 import { useSelector } from "react-redux";
 
 import { DEFAULT_USER, SORT_OPTIONS } from "../constants";
+import { fetchMovies, setUsersDataLocally } from "../customFunctions";
 
 import MoviesGridView from"../components/MoviesGridView";
 
 
 const MoviesList = () => {
 
+  let defaultUserMoviesLocal = useMemo(() => localStorage.getItem(DEFAULT_USER.username), []); 
+
   const movies = useSelector(state => {
-
-    let defaultUserMoviesLocal = localStorage.getItem(DEFAULT_USER.username); 
-
     return state.usersMoviesReducer[DEFAULT_USER.username].length 
     ? state.usersMoviesReducer[DEFAULT_USER.username] 
     : (defaultUserMoviesLocal ? JSON.parse(defaultUserMoviesLocal) : []);
   });
 
   const [sortedMovies, setSortedMovies] = useState(movies);
+
+
+  useEffect(() => {
+
+    if (!movies.length) {
+      async function loadingMoviesInitially() {
+        setSortedMovies(await fetchMovies());
+      }
+      loadingMoviesInitially();
+    }
+  }, [movies.length]);
+
+
+  useEffect(() => {
+    
+    if (!defaultUserMoviesLocal) {
+      setUsersDataLocally(DEFAULT_USER.username, sortedMovies);
+    }
+  }, [defaultUserMoviesLocal, sortedMovies]);
 
 
   const handleSortOrder = useCallback(() => 
