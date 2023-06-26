@@ -6,9 +6,8 @@ import { useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loadMoviesInitially } from "../redux/usersMovies";
 
-import Axios from "axios";
-
 import { DEFAULT_USER } from "../constants";
+import { fetchMovies, setUsersDataLocally } from "../customFunctions";
 
 import MoviesGridView from "../components/MoviesGridView";
 
@@ -19,16 +18,6 @@ const Home = () => {
 
   const { users: existingUsers, signedInUser } = useSelector(state => state.usersReducer);
   const movies = useSelector(state => state.usersMoviesReducer[signedInUser] ?? []);
-
-
-  const fetchMovies = useCallback(async () => {
-
-    const URL = process.env.REACT_APP_MOVIES_API_URL;
-    const { data: { movies: fetchedMovies } } = await Axios.get(URL);
-
-    return fetchedMovies;
-
-  }, []);
 
 
   useEffect(() => {
@@ -58,16 +47,11 @@ const Home = () => {
 
     loadingMoviesInitially();
 
-  }, [signedInUser, userMovieDispatch, fetchMovies]);
+  }, [signedInUser, userMovieDispatch]);
  
 
   useEffect(() => {
-
-    function setUsersDataLocally() {
-
-      localStorage.setItem(signedInUser, JSON.stringify(movies));
-    }
-    setUsersDataLocally();
+      setUsersDataLocally(signedInUser, movies);
   }, [signedInUser, movies]);
 
 
@@ -85,7 +69,7 @@ const Home = () => {
       toast("Regenerated Movies", { type: "success" });
     }
 
-  }, [signedInUser, fetchMovies, userMovieDispatch]);
+  }, [signedInUser, userMovieDispatch]);
 
 
   return (
