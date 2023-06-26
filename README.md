@@ -28,3 +28,6 @@ Developed a user-friendly Movie App with React/Redux, delivering an immersive br
 
 # Deployed On
 - GitHub Pages
+
+# Note
+- You will find in the codebase that API response data is stored in the local storage, yes, it is not the right approach but the reason for storing in it's that the API data is not dynamic and got going to change as it's a mock API which I created so, it always loads the same 12 popular science fiction movies and storing locally helped in achieving the better performance.
