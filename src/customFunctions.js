@@ -1,4 +1,20 @@
+import Axios from "axios";
+
 import { MILLISECONDS_PER_DAY } from "./constants";
+
+
+function setUsersDataLocally(signedInUser, movies) {
+
+  localStorage.setItem(signedInUser, JSON.stringify(movies));
+}
+
+const fetchMovies = async () => {
+
+  const URL = process.env.REACT_APP_MOVIES_API_URL;
+  const { data: { movies: fetchedMovies } } = await Axios.get(URL);
+
+  return fetchedMovies;
+};
 
 
 function clearCustomCookie(cookieName) {
@@ -113,7 +129,9 @@ const reverseVal = memoFunc(theReverseVal);
 const removeUniqueKeyStr = memoFunc(theRemoveUniqueKeyStr);
 
 
-export { 
+export {
+  setUsersDataLocally,
+  fetchMovies, 
   clearCustomCookie, 
   getCustomCookieValue, 
   setCustomCookie, 
