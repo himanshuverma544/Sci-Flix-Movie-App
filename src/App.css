@@ -180,7 +180,8 @@ footer {
   border-radius: 20px;
 }
 
-.the-description-modal .content h3 {
+.the-description-modal .content h3,
+.the-description-modal .content p {
   text-align: center;
   padding: 10px;
 }
