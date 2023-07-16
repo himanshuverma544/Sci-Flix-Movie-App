@@ -56,6 +56,7 @@ const EditModal = ({ movieReqRatingDetails: { signedInUser: currentSignedInUser,
               defaultValue={rating}
               type="text"
               autoComplete="off"
+              autoFocus
             />
           </FormGroup>
           <Button className="btn-bg-color mt-2">
