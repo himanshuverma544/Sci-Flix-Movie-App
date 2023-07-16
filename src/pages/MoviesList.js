@@ -3,61 +3,52 @@ import Select from "react-select";
 import { AiOutlineSearch } from "react-icons/ai";
 import { BiSortAlt2 } from "react-icons/bi";
 
-import { useState, useEffect, useCallback, useMemo } from "react";
+import { useState, useEffect, useCallback } from "react";
 
-import { useSelector } from "react-redux";
+import { useQuery } from "react-query";
 
-import { DEFAULT_USER, SORT_OPTIONS } from "../constants";
-import { fetchMovies, setUsersDataLocally } from "../customFunctions";
+import { SORT_OPTIONS } from "../constants";
+import { fetchMovies } from "../customFunctions";
 
 import MoviesGridView from"../components/MoviesGridView";
 
 
 const MoviesList = () => {
+  
 
-  let defaultUserMoviesLocal = useMemo(() => localStorage.getItem(DEFAULT_USER.username), []); 
-
-  const movies = useSelector(state => {
-    return state.usersMoviesReducer[DEFAULT_USER.username].length 
-    ? state.usersMoviesReducer[DEFAULT_USER.username] 
-    : (defaultUserMoviesLocal ? JSON.parse(defaultUserMoviesLocal) : []);
+  const { 
+    data: movies, 
+    isSuccess 
+  } = 
+  useQuery({
+    queryKey: ["movies"],
+    queryFn: fetchMovies
   });
-
-  const [sortedMovies, setSortedMovies] = useState(movies);
+  
+  const [sortedMovies, setSortedMovies] = useState([]);
 
 
   useEffect(() => {
 
-    if (!movies.length) {
-      async function loadingMoviesInitially() {
-        setSortedMovies(await fetchMovies());
+    if (isSuccess) {
+      
+      function loadMoviesInitially() {
+        setSortedMovies(movies);
       }
-      loadingMoviesInitially();
+      loadMoviesInitially();
     }
-  }, [movies.length]);
-
-
-  useEffect(() => {
-    
-    if (!defaultUserMoviesLocal) {
-      setUsersDataLocally(DEFAULT_USER.username, sortedMovies);
-    }
-  }, [defaultUserMoviesLocal, sortedMovies]);
+  }, [isSuccess, movies]);
 
 
   const handleSortOrder = useCallback(() => 
-
     setSortedMovies(prev => [...prev].reverse())
-
   , []);
 
 
   const handleSortBy = useCallback(sortBy => 
-
     setSortedMovies(prev => [...prev].sort((a, b) =>
       a[sortBy] < b[sortBy] ? -1 : (a[sortBy] > b[sortBy] ? 1 : 0)
     ))
-
   , []);
 
 
