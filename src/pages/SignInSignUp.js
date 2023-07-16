@@ -21,7 +21,7 @@ const SignInSignUp = () => {
   const userDispatch = userMovieDispatch;
   const { users: existingUsers, signedInUser } = useSelector(state => state.usersReducer);
 
-  const [status, setStatus] = useState(signedInUser === DEFAULT_USER.username ? SIGN_UP: SIGN_OUT);
+  const [status, setStatus] = useState(signedInUser === DEFAULT_USER.username ? SIGN_IN: SIGN_OUT);
 
   const usernameNode = useRef(null);
   const passwordNode = useRef(null);
@@ -49,13 +49,13 @@ const SignInSignUp = () => {
       const confirmPassword = confirmPasswordNode.current.value;
 
       if (username.includes(DEFAULT_USER.username)) {
-        toast(`Using ${username} in or as username is not allowed`, {type: "warning"});
+        toast(`Using ${DEFAULT_USER.username} for the username is not allowed`, {type: "warning"});
       }
       else if (getUser(username)) {
         toast("Username already exists", {type: "error"});
       }
       else if (username.length < 4 || password.length < 8) {
-        toast("Username and Password length must be equal to and greater than 5 and 8 respectively", {type: "error"});
+        toast("Username and Password length must be equal to and greater than 4 and 8 respectively", {type: "error"});
       }
       else if (password !== confirmPassword) {
         toast("Passwords do not match", {type: "error"});
@@ -171,7 +171,7 @@ const SignInSignUp = () => {
           </>
         }
         <Button className="btn-bg-color">
-          {status === SIGN_IN ? "Sign In" : (status === SIGN_UP ? "Sign Up" : "Sign Out")}
+          {status === SIGN_IN ? SIGN_IN : (status === SIGN_UP ? SIGN_UP : SIGN_OUT)}
         </Button>
       </Form>
     </Container>
