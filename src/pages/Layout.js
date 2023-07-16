@@ -2,7 +2,7 @@ import { Outlet, NavLink } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { useSelector } from "react-redux";
 
-import { DEFAULT_USER } from "../constants";
+import { DEFAULT_USER, SIGN_IN, SIGN_UP, SIGN_OUT } from "../constants";
 
 
 const Layout = () => {
@@ -20,7 +20,7 @@ const Layout = () => {
             <NavLink to="/all-movies-list">All Movies List</NavLink>
           </li>
           <li>
-            <NavLink to="/sign-in-sign-up">{signedInUser === DEFAULT_USER.username ? "Sign In or Sign Up" : "Sign Out"}</NavLink>
+            <NavLink to="/sign-in-sign-up">{signedInUser === DEFAULT_USER.username ? `${SIGN_IN} or ${SIGN_UP}` : SIGN_OUT}</NavLink>
           </li>
         </ul>
       </nav>
