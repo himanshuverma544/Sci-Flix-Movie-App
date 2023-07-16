@@ -4,7 +4,9 @@ import { toast } from "react-toastify";
 import { useEffect, useCallback } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
-import { loadMoviesInitially } from "../redux/usersMovies";
+import { loadMovies } from "../redux/usersMovies";
+
+import { useQuery } from "react-query";
 
 import { DEFAULT_USER } from "../constants";
 import { fetchMovies, setUsersDataLocally } from "../customFunctions";
@@ -17,7 +19,17 @@ const Home = () => {
   const userMovieDispatch = useDispatch();
 
   const { users: existingUsers, signedInUser } = useSelector(state => state.usersReducer);
-  const movies = useSelector(state => state.usersMoviesReducer[signedInUser] ?? []);
+
+  const { 
+    data: moviesData, 
+    isSuccess 
+  } = 
+  useQuery({
+    queryKey: ["movies"],
+    queryFn: fetchMovies
+  });
+
+  const movies = useSelector(state => state.usersMoviesReducer[signedInUser] ?? []); 
 
 
   useEffect(() => {
@@ -31,45 +43,49 @@ const Home = () => {
   }, [existingUsers]);
 
 
-  useEffect(() => {   
-
-    async function loadingMoviesInitially() {
-
-      const userMoviesLocal = localStorage.getItem(signedInUser);
+  useEffect(() => {
     
+    async function loadMoviesInRedux() {
+      
+      const userMoviesLocal = localStorage.getItem(signedInUser);
+
       userMovieDispatch(
-        loadMoviesInitially({
+        loadMovies({
           username: signedInUser,
-          movies: userMoviesLocal ? JSON.parse(userMoviesLocal) : await fetchMovies() 
+          movies: userMoviesLocal ? JSON.parse(userMoviesLocal) : (isSuccess ? moviesData : [])
         })
       );
     }
+      
+    loadMoviesInRedux();
+      
+  }, [signedInUser, isSuccess, moviesData, userMovieDispatch]);
+    
 
-    loadingMoviesInitially();
-
-  }, [signedInUser, userMovieDispatch]);
- 
+  const isSignedInUser = useCallback(() => signedInUser !== DEFAULT_USER.username, [signedInUser]);
 
   useEffect(() => {
+    if (isSignedInUser()) {
       setUsersDataLocally(signedInUser, movies);
-  }, [signedInUser, movies]);
+    }
+  }, [signedInUser, movies, isSignedInUser]);
 
 
   /* Regenerate Movies */
 
   const regenerateMovies = useCallback(async () => {
 
-    if (signedInUser !== DEFAULT_USER.username) {
+    if (isSignedInUser()) {
       userMovieDispatch(
-        loadMoviesInitially({
+        loadMovies({
           username: signedInUser,
-          movies: await fetchMovies()
+          movies: moviesData
         })
       );
       toast("Regenerated Movies", { type: "success" });
     }
 
-  }, [signedInUser, userMovieDispatch]);
+  }, [signedInUser, moviesData, isSignedInUser, userMovieDispatch]);
 
 
   return (
