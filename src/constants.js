@@ -3,9 +3,9 @@ const DEFAULT_USER = {
   password: null,
 };
 
-const SIGN_UP = "SIGN_UP";
-const SIGN_IN = "SIGN_IN";
-const SIGN_OUT = "SIGN_OUT";
+const SIGN_UP = "Sign Up";
+const SIGN_IN = "Sign In";
+const SIGN_OUT = "Sign Out";
 
 const HOME = "/";
 const ALL_MOVIES_LIST = "/all-movies-list";
