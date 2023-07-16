@@ -172,129 +172,130 @@ const MoviesGridView = ({movies}) => {
 
   return (       
     movies.length ? 
-    
-      <Row>
-        { movies.map(movie => (
-          <Col className="cards-col py-5" key={movie.id} sm={6} md={4}>
-            <Card className="movie-card">
-              <div 
-                className="movie-img-container" 
-                onClick={() => openImageModal({
-                  url: movie.thumbnail,
-                  alt: movie.name
-                })}
-              >
-                { pathname === HOME && 
-                  <div className="actions-on-movie d-flex"> 
-                    <AiOutlineEdit 
-                      className="edit-movie me-2" 
-                      onClick={event => openEditModal(event, {
-                        signedInUser,
-                        id: movie.id,
-                        name: movie.name,
-                        rating: movie.rating,
-                      })}
-                    />
-                    <AiOutlineDelete 
-                      className="delete-movie" 
-                      onClick={event => openDeleteModal(event, {
-                        signedInUser,
-                        id: movie.id,
-                        name: movie.name,
-                      })}
-                    />
-                  </div>
-                } 
-                <img src={movie.thumbnail} alt={movie.name}/>
-              </div>
-              <CardBody>
-                <CardTitle className="movie-name">
-                  {movie.name}
-                </CardTitle>
-                <CardText className="movie-rating">
-                  Rating: {movie.rating}
-                </CardText>
-                <CardText className="movie-release-date">
-                  Released On: {formatDate(movie.release_date)}
-                </CardText>
-                <div className="btns-container">
-                  <Button 
-                    className="watch-trailer-btn btn-bg-color" 
-                    onClick={() => openVideoModal(movie.trailer_link)}
-                  >
-                    Watch Trailer
-                  </Button>
-                  <Button
-                    className="read-description-btn btn-bg-color mt-2" 
-                    onClick={() => openDescriptionModal({
-                      name: movie.name,
-                      description: movie.description
-                    })}
-                  >
-                    Read Description
-                  </Button>
-                  { pathname === ALL_MOVIES_LIST &&
+      <>
+        <Row>
+          { movies.map(movie => (
+            <Col className="cards-col py-5" key={movie.id} sm={6} md={4}>
+              <Card className="movie-card">
+                <div 
+                  className="movie-img-container" 
+                  onClick={() => openImageModal({
+                    url: movie.thumbnail,
+                    alt: movie.name
+                  })}
+                >
+                  { pathname === HOME && 
+                    <div className="actions-on-movie d-flex"> 
+                      <AiOutlineEdit 
+                        className="edit-movie me-2" 
+                        onClick={event => openEditModal(event, {
+                          signedInUser,
+                          id: movie.id,
+                          name: movie.name,
+                          rating: movie.rating,
+                        })}
+                      />
+                      <AiOutlineDelete 
+                        className="delete-movie" 
+                        onClick={event => openDeleteModal(event, {
+                          signedInUser,
+                          id: movie.id,
+                          name: movie.name,
+                        })}
+                      />
+                    </div>
+                  } 
+                  <img src={movie.thumbnail} alt={movie.name}/>
+                </div>
+                <CardBody>
+                  <CardTitle className="movie-name">
+                    {movie.name}
+                  </CardTitle>
+                  <CardText className="movie-rating">
+                    Rating: {movie.rating}
+                  </CardText>
+                  <CardText className="movie-release-date">
+                    Released On: {formatDate(movie.release_date)}
+                  </CardText>
+                  <div className="btns-container">
                     <Button 
-                      className="comment-btn btn-bg-color mt-2" 
-                      onClick={() => openCommentsModal({
-                        signedInUser,
-                        movieName: movie.name,
+                      className="watch-trailer-btn btn-bg-color" 
+                      onClick={() => openVideoModal(movie.trailer_link)}
+                    >
+                      Watch Trailer
+                    </Button>
+                    <Button
+                      className="read-description-btn btn-bg-color mt-2" 
+                      onClick={() => openDescriptionModal({
+                        name: movie.name,
+                        description: movie.description
                       })}
                     >
-                      Comment
+                      Read Description
                     </Button>
-                  }
-                </div>
-              </CardBody>
-            </Card>
-          </Col>
-        ))}
-        
+                    { pathname === ALL_MOVIES_LIST &&
+                      <Button 
+                        className="comment-btn btn-bg-color mt-2" 
+                        onClick={() => openCommentsModal({
+                          signedInUser,
+                          movieName: movie.name,
+                        })}
+                      >
+                        Comment
+                      </Button>
+                    }
+                  </div>
+                </CardBody>
+              </Card>
+            </Col>
+          ))}
+        </Row>
+
         {showImageModal && 
-          <ImageModal 
-            movieImage={showImageModal} 
-            imageModalImageNode={imageModalImageNode} 
-            closeImageModal={closeImageModal}
-          />
-        }
-        {showVideoModal && 
-          <VideoModal 
-            movieTrailerUrl={showVideoModal} 
-            videoModalMovieTrailerNode={videoModalMovieTrailerNode} 
-            closeVideoModal={closeVideoModal}
-          />
-        }
-        {showDescriptionModal && 
-          <DescriptionModal
-            movieReqDescDetails={showDescriptionModal}
-            descriptionModalTextNode={descriptionModalTextNode}
-            closeDescriptionModal={closeDescriptionModal}
-          />  
-        }
-        {showEditModal &&
-          <EditModal
-            movieReqRatingDetails={showEditModal}
-            editModalRatingNode={editModalRatingNode}
-            closeEditModal={closeEditModal}
-          />
-        }
-        {showCommentsModal &&
-          <CommentsModal
-            commentReqDetails={showCommentsModal}
-            commentsModalCommentsNode={commentsModalCommentsNode}
-            closeCommentsModal={closeCommentsModal}
-          />
-        }
-        {showDeleteModal &&
-          <DeleteModal
-            movieReqDeletingDetails={showDeleteModal}
-            deleteModalDeleteNode={deleteModalDeleteNode}
-            closeDeleteModal={closeDeleteModal}
-          />
-        }
-      </Row>
+            <ImageModal 
+              movieImage={showImageModal} 
+              imageModalImageNode={imageModalImageNode} 
+              closeImageModal={closeImageModal}
+            />
+          }
+          {showVideoModal && 
+            <VideoModal 
+              movieTrailerUrl={showVideoModal} 
+              videoModalMovieTrailerNode={videoModalMovieTrailerNode} 
+              closeVideoModal={closeVideoModal}
+            />
+          }
+          {showDescriptionModal && 
+            <DescriptionModal
+              movieReqDescDetails={showDescriptionModal}
+              descriptionModalTextNode={descriptionModalTextNode}
+              closeDescriptionModal={closeDescriptionModal}
+            />  
+          }
+          {showEditModal &&
+            <EditModal
+              movieReqRatingDetails={showEditModal}
+              editModalRatingNode={editModalRatingNode}
+              closeEditModal={closeEditModal}
+            />
+          }
+          {showCommentsModal &&
+            <CommentsModal
+              commentReqDetails={showCommentsModal}
+              commentsModalCommentsNode={commentsModalCommentsNode}
+              closeCommentsModal={closeCommentsModal}
+            />
+          }
+          {showDeleteModal &&
+            <DeleteModal
+              movieReqDeletingDetails={showDeleteModal}
+              deleteModalDeleteNode={deleteModalDeleteNode}
+              closeDeleteModal={closeDeleteModal}
+            />
+          }
+      </>
     : null 
   )
-}
+};
 
 export default MoviesGridView;
