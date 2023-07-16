@@ -15,7 +15,7 @@ const usersMoviesSlice = createSlice({
         [action.payload.username]: []
       }
     },
-    loadMoviesInitially(state, action) {
+    loadMovies(state, action) {
       return {
         ...state,
         [action.payload.username]: action.payload.movies
@@ -40,5 +40,5 @@ const usersMoviesSlice = createSlice({
   }
 });
 
-export const { addNewUser, loadMoviesInitially, editMovie, deleteMovie } = usersMoviesSlice.actions;
+export const { addNewUser, loadMovies, editMovie, deleteMovie } = usersMoviesSlice.actions;
 export default usersMoviesSlice.reducer;
