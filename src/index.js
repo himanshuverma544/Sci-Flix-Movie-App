@@ -8,12 +8,19 @@ import store from "./redux/store";
 
 import ContextProvider from "./context-API/ContextProvider";
 
+import { QueryClient, QueryClientProvider } from 'react-query';
+
+
+const queryClient = new QueryClient();
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <ContextProvider>
     <Provider store={store}>
-      <App/>
+      <QueryClientProvider client={queryClient}>
+        <App/>
+      </QueryClientProvider>
     </Provider>
   </ContextProvider>
 );
