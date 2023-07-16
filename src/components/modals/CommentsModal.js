@@ -173,16 +173,19 @@ const CommentsModal = ({commentReqDetails: { signedInUser: currentSignedInUser ,
                 innerRef={userCommentNode}
                 placeholder="Add a comment…"
                 autoComplete="off"
+                autoFocus
                 onChange={event => setUserComment(event.target.value)}
               />    
-              <Button className="post-comment-btn">
+              <Button 
+                className="post-comment-btn"
+                style={{cursor: userComment.length ? "pointer" : "default"}}
+              >
                 <AiOutlineSend 
                   className="icon"
                   style={{ 
                     color: userComment.length ? "rgba(0, 0, 0, 1)" : "rgba(0, 0, 0, 0.5)",
-                    cursor: userComment.length ? "pointer" : "default"
                   }}
-                  />
+                />
               </Button>
             </InputGroup> 
           </FormGroup>
