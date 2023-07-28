@@ -27,5 +27,8 @@ Developed a user-friendly Movie App with React/Redux, delivering an immersive br
 - uuid
 - gh-pages
 
+# Module Bundler
+- Webpack
+
 # Deployed On
 - GitHub Pages
