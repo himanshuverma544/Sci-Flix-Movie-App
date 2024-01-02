@@ -13,7 +13,7 @@ import { signUp, signIn, signOut } from "../redux/users";
 import { DEFAULT_USER, SIGN_UP, SIGN_IN, SIGN_OUT, CNAME_SIGNED_IN_USER } from "../constants";
 
 
-const SignInSignUp = () => {
+const Authentication = () => {
 
   const navigate = useNavigate();
 
@@ -178,4 +178,4 @@ const SignInSignUp = () => {
   );
 }
 
-export default SignInSignUp;
+export default Authentication;
