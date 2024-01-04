@@ -7,7 +7,7 @@ import Layout from './pages/Layout';
 import Home from './pages/Home';
 import MoviesList from './pages/MoviesList';
 import NoPage from './pages/NoPage';
-import SignInSignUp from './pages/SignInSignUp';
+import Authentication from './pages/Authentication';
 
 function App() {
   return (
@@ -16,7 +16,7 @@ function App() {
         <Route path="/" element={<Layout/>}>
           <Route index element={<Home/>}/>
           <Route path="all-movies-list" element={<MoviesList/>}/>
-          <Route path="sign-in-sign-up" element={<SignInSignUp/>}/>
+          <Route path="authentication" element={<Authentication/>}/>
           <Route path="*" element={<NoPage/>}/>
         </Route>
       </Routes>
