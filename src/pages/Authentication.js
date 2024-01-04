@@ -117,7 +117,7 @@ const Authentication = () => {
   }, [status, getUser, userMovieDispatch, userDispatch, navigate]);
 
   return (
-    <Container className="sign-in-sign-up-form-container">
+    <Container className="auth-form-cont">
       {[SIGN_UP, SIGN_IN].includes(status) &&
         <div className="d-flex justify-content-center mb-3">
           <Button 
