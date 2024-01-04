@@ -48,10 +48,10 @@ const MoviesGridView = ({movies}) => {
 
     /* Utilities Functions */
 
-    const navigateToSignInSignUpPage = useCallback(() => {
+    const navigateToAuthenticationPage = useCallback(() => {
 
-      navigate("/sign-in-sign-up");
-      toast("You need to Sign In or Sign Up first to make changes", {type: "info"});
+      navigate("/authentication");
+      toast("You need to Sign In first to make changes", {type: "info"});
   
     }, [navigate]);
   
@@ -114,9 +114,9 @@ const MoviesGridView = ({movies}) => {
         setShowEditModal(movieReqRatingDetails);
       }
       else {
-        navigateToSignInSignUpPage();
+        navigateToAuthenticationPage();
       }
-    }, [signedInUser, navigateToSignInSignUpPage]);
+    }, [signedInUser, navigateToAuthenticationPage]);
   
 
     const closeEditModal = useCallback((event = null) => {
@@ -140,9 +140,9 @@ const MoviesGridView = ({movies}) => {
         setShowDeleteModal(movieReqDeletingDetails);
       }
       else {
-        navigateToSignInSignUpPage();
+        navigateToAuthenticationPage();
       }
-    }, [signedInUser, navigateToSignInSignUpPage]);
+    }, [signedInUser, navigateToAuthenticationPage]);
   
 
     const closeDeleteModal = useCallback((event = null) => {

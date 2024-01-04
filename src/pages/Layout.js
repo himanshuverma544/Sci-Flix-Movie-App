@@ -26,7 +26,7 @@ const Layout = () => {
                   <NavLink to="/all-movies-list">All Movies List</NavLink>
                 </li>
                 <li>
-                  <NavLink to="/sign-in-sign-up">{signedInUser === DEFAULT_USER.username ? `${SIGN_IN}` : SIGN_OUT}</NavLink>
+                  <NavLink to="/authentication">{signedInUser === DEFAULT_USER.username ? `${SIGN_IN}` : SIGN_OUT}</NavLink>
                 </li>
               </ul>
             </nav>
