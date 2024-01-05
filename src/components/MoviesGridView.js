@@ -207,7 +207,7 @@ const MoviesGridView = ({movies}) => {
                   } 
                   <img src={movie.thumbnail} alt={movie.name}/>
                 </div>
-                <CardBody>
+                <CardBody className="movie-card-body">
                   <CardTitle className="movie-name">
                     {movie.name}
                   </CardTitle>
@@ -225,7 +225,7 @@ const MoviesGridView = ({movies}) => {
                       Watch Trailer
                     </Button>
                     <Button
-                      className="read-description-btn btn-bg-color mt-2" 
+                      className="read-desc-btn btn-bg-color mt-2" 
                       onClick={() => openDescriptionModal({
                         name: movie.name,
                         description: movie.description
