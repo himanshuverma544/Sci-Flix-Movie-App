@@ -37,9 +37,31 @@ footer {
 
 /* Movies Cards */
 
+.movie-card {
+  overflow: auto;
+  height: 100% !important;
+}
+
 .movie-img-container {
   position: relative;
+  width: 100%;
+  height: 0;
+  padding-top: 140%;
   cursor: pointer;
+  overflow: hidden;
+}
+
+.movie-img-container img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: transform 1s ease;
+}
+
+.movie-img-container:hover img {
+  transform: scale(1.1);
 }
 
 .movie-img-container:hover::before {
@@ -49,6 +71,7 @@ footer {
   left: 0; 
   width: 100%;
   height: 100%;
+  z-index: 1;
   background-color: rgba(0, 0, 0, 0.5);
 }
 
@@ -68,12 +91,15 @@ footer {
   visibility: visible;
 }
 
-.movie-card img {
-  width: -webkit-fill-available;
-}
-
 .edit-movie, .delete-movie {
   cursor: pointer;
+}
+
+.movie-card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .movie-name, .movie-rating, .movie-release-date {
@@ -95,11 +121,16 @@ footer {
 }
 
 .btns-container {
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
 }
 
+.movie-card-body button {
+  width: 100%;
+}
 
 /* Modals */
 
