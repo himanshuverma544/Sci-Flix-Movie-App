@@ -7,15 +7,15 @@ import { useState, useRef, useCallback } from "react";
 
 import { useSelector } from "react-redux";
 
-import { DEFAULT_USER, HOME, ALL_MOVIES_LIST } from "../constants";
-import { formatDate } from "../customFunctions";
-
 import ImageModal from "./modals/ImageModal";
 import VideoModal from "./modals/VideoModal";
 import DescriptionModal from "./modals/DescriptionModal";
 import EditModal from "./modals/EditModal";
 import DeleteModal from "./modals/DeleteModal";
 import CommentsModal from "./modals/CommentsModal";
+
+import { DEFAULT_USER, HOME, MOVIES, AUTHENTICATION } from "../constants";
+import { formatDate } from "../customFunctions";
 
 
 const MoviesGridView = ({movies}) => {
@@ -50,7 +50,7 @@ const MoviesGridView = ({movies}) => {
 
     const navigateToAuthenticationPage = useCallback(() => {
 
-      navigate("/authentication");
+      navigate(AUTHENTICATION.pathname);
       toast("You need to Sign In first to make changes", {type: "info"});
   
     }, [navigate]);
@@ -233,7 +233,7 @@ const MoviesGridView = ({movies}) => {
                     >
                       Read Description
                     </Button>
-                    { pathname === ALL_MOVIES_LIST &&
+                    { pathname === MOVIES.pathname &&
                       <Button 
                         className="comment-btn btn-bg-color mt-2" 
                         onClick={() => openCommentsModal({

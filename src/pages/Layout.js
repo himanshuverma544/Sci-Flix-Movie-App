@@ -2,11 +2,10 @@ import { Outlet, NavLink } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { useSelector } from "react-redux";
 
-import { DEFAULT_USER, SIGN_IN, SIGN_OUT } from "../constants";
-
-import { HiOutlineHome } from "react-icons/hi2";
 import { Container } from "reactstrap";
+import { HiOutlineHome } from "react-icons/hi2";
 
+import { HOME, MOVIES, AUTHENTICATION, DEFAULT_USER } from "../constants";
 
 const Layout = () => {
 
@@ -20,13 +19,15 @@ const Layout = () => {
             <nav className="movie-app-navbar">
               <ul>
                 <li>
-                  <NavLink to="/">Home</NavLink>
+                  <NavLink to={HOME.pathname}>{HOME.title}</NavLink>
                 </li>
                 <li>
-                  <NavLink to="/all-movies-list">All Movies List</NavLink>
+                  <NavLink to={MOVIES.pathname}>{MOVIES.title}</NavLink>
                 </li>
                 <li>
-                  <NavLink to="/authentication">{signedInUser === DEFAULT_USER.username ? `${SIGN_IN}` : SIGN_OUT}</NavLink>
+                  <NavLink to={AUTHENTICATION.pathname}>
+                    {signedInUser === DEFAULT_USER.username ? AUTHENTICATION.signInTitle : AUTHENTICATION.signOutTitle}
+                  </NavLink>
                 </li>
               </ul>
             </nav>

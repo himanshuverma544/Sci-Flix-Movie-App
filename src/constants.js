@@ -3,12 +3,26 @@ const DEFAULT_USER = {
   password: null,
 };
 
-const SIGN_UP = "Sign Up";
-const SIGN_IN = "Sign In";
-const SIGN_OUT = "Sign Out";
+const HOME = {
+  title: "Home",
+  pathname: "/"
+};
 
-const HOME = "/";
-const ALL_MOVIES_LIST = "/all-movies-list";
+const MOVIES = {
+  title: "Movies",
+  pathname: "/all-movies-list"
+};
+
+const AUTHENTICATION = {
+  signInTitle: "Sign In",
+  signUpTitle: "Sign Up",
+  signOutTitle: "Sign Out",
+  pathname: "/authentication"
+};
+
+const PAGE404 = {
+  pathname: "*"
+};
 
 const REPRESENTING_YOU = "You";
 
@@ -26,16 +40,15 @@ const CNAME_SIGNED_IN_USER = "signedInUser";
 
 
 export {
-  CNAME_SIGNED_IN_USER,
-  MILLISECONDS_PER_DAY,
-  SORT_OPTIONS, 
-  EDIT_COMMENT,
-  ADD_COMMENT, 
-  REPRESENTING_YOU, 
-  ALL_MOVIES_LIST, 
+  DEFAULT_USER, 
   HOME, 
-  SIGN_OUT, 
-  SIGN_IN, 
-  SIGN_UP, 
-  DEFAULT_USER 
+  MOVIES, 
+  AUTHENTICATION, 
+  PAGE404, 
+  REPRESENTING_YOU,
+  ADD_COMMENT, 
+  EDIT_COMMENT, 
+  SORT_OPTIONS, 
+  MILLISECONDS_PER_DAY,
+  CNAME_SIGNED_IN_USER
 };
