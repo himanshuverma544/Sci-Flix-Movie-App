@@ -1,15 +1,25 @@
 /* Navbar */
 
 .movie-app-navbar {
-  background-color: #1c1c1c;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
   padding: 18px;
+  z-index: 2;
+  background-color: #1c1c1c;
+}
+
+.movie-app-navbar ul {
+  display: flex;
+  justify-content: space-evenly;
 }
 
 .movie-app-navbar ul li {
   margin-top: 15px;
   font-size: 20px;
-  color: #FFF;
   cursor: pointer;
+  color: #FFF;
 }
 
 .movie-app-navbar ul li a {
@@ -131,6 +141,7 @@ footer {
 .movie-card-body button {
   width: 100%;
 }
+
 
 /* Modals */
 
