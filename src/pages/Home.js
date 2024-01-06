@@ -91,9 +91,9 @@ const Home = () => {
   return (
     <section>
       <MoviesGridView movies={movies}/>
-      <Row>
+      <Row className="mt-4">
         <Col className="regenerate-col">
-          <Button className="regenerate-btn btn-bg-color mb-4" onClick={regenerateMovies}>
+          <Button className="regenerate-btn btn-bg-color" onClick={regenerateMovies}>
             Regenerate Movies
           </Button>
         </Col>
