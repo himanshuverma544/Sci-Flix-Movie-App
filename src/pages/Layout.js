@@ -1,11 +1,18 @@
-import { Outlet, NavLink } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
+import { Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 import { Container } from "reactstrap";
+
 import { HiOutlineHome } from "react-icons/hi2";
+import { BiCameraMovie } from "react-icons/bi";
+import { FiUser } from "react-icons/fi";
+
+import { ToastContainer } from "react-toastify";
+
+import SmartNavLink from "../components/SmartNavLink";
 
 import { HOME, MOVIES, AUTHENTICATION, DEFAULT_USER } from "../constants";
+
 
 const Layout = () => {
 
@@ -19,15 +26,28 @@ const Layout = () => {
             <nav className="movie-app-navbar">
               <ul>
                 <li>
-                  <NavLink to={HOME.pathname}>{HOME.title}</NavLink>
+                  <SmartNavLink
+                    path={HOME.pathname}
+                    icon={<HiOutlineHome/>}
+                    title={HOME.title}
+                  />
                 </li>
                 <li>
-                  <NavLink to={MOVIES.pathname}>{MOVIES.title}</NavLink>
+                  <SmartNavLink
+                    path={MOVIES.pathname}
+                    icon={<BiCameraMovie/>}
+                    title={MOVIES.title}
+                  />
                 </li>
                 <li>
-                  <NavLink to={AUTHENTICATION.pathname}>
-                    {signedInUser === DEFAULT_USER.username ? AUTHENTICATION.signInTitle : AUTHENTICATION.signOutTitle}
-                  </NavLink>
+                  <SmartNavLink 
+                    path={AUTHENTICATION.pathname}
+                    icon={<FiUser/>}
+                    title={ signedInUser === DEFAULT_USER.username ? 
+                      AUTHENTICATION.signInTitle : 
+                      AUTHENTICATION.signOutTitle
+                    }
+                  />
                 </li>
               </ul>
             </nav>
