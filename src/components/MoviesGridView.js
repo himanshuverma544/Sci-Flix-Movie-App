@@ -173,12 +173,12 @@ const MoviesGridView = ({movies}) => {
   return (       
     movies.length ? 
       <>
-        <Row>
+        <Row className="gy-4">
           { movies.map(movie => (
-            <Col className="cards-col py-5" key={movie.id} sm={6} md={4}>
+            <Col className="movies-card-col gx-0" key={movie.id} sm={6} md={4}>
               <Card className="movie-card">
                 <div 
-                  className="movie-img-container" 
+                  className="movie-img-container"
                   onClick={() => openImageModal({
                     url: movie.thumbnail,
                     alt: movie.name
