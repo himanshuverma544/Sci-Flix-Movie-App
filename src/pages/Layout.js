@@ -14,11 +14,11 @@ const Layout = () => {
 
   return (
     <>
-      <Container className="master-cont" fluid>
-        <Container className="header-cont" fluid>
+      <Container className="master-cont gx-0" fluid>
+        <Container className="header-cont gx-0" fluid>
           <header>
-            <nav className="movie-app-navbar mb-4">
-              <ul className="d-flex justify-content-evenly">
+            <nav className="movie-app-navbar">
+              <ul>
                 <li>
                   <NavLink to="/">Home</NavLink>
                 </li>
@@ -33,14 +33,14 @@ const Layout = () => {
           </header>
         </Container>
 
-        <Container className="main-cont">
+        <Container className="main-cont my-5">
           <main>
             <Outlet/>
           </main>
           <ToastContainer position="bottom-left"/>
         </Container>
         
-        <Container className="footer-cont" fluid>
+        <Container className="footer-cont gx-0" fluid>
           <footer>
             Popular Science Fiction Movies
           </footer>
