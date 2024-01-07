@@ -8,7 +8,7 @@ import { useState, useEffect, useCallback } from "react";
 import { useQuery } from "react-query";
 
 import { SORT_OPTIONS } from "../constants";
-import { fetchMovies } from "../customFunctions";
+import { fetchMovies } from "../functions";
 
 import MoviesGridView from"../components/MoviesGridView";
 

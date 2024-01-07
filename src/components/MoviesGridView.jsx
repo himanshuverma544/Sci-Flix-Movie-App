@@ -15,7 +15,7 @@ import DeleteModal from "./modals/DeleteModal";
 import CommentsModal from "./modals/CommentsModal";
 
 import { DEFAULT_USER, HOME, MOVIES, AUTHENTICATION } from "../constants";
-import { formatDate } from "../customFunctions";
+import { formatDate } from "../functions";
 
 
 const MoviesGridView = ({movies}) => {

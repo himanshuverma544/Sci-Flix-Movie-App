@@ -10,7 +10,7 @@ function setUsersDataLocally(signedInUser, movies) {
 
 const fetchMovies = async () => {
 
-  const URL = process.env.REACT_APP_MOVIES_API_URL;
+  const URL = import.meta.env.VITE_MOVIES_API_URL;
   const { data: { movies: fetchedMovies } } = await Axios.get(URL);
 
   return fetchedMovies;
@@ -123,10 +123,10 @@ function memoFunc(func) {
 }
 
 
+const removeUniqueKeyStr = memoFunc(theRemoveUniqueKeyStr);
+const reverseVal = memoFunc(theReverseVal);
 const formatDate = memoFunc(theFormatDate);
 const capitalizeUsername = memoFunc(theCapitalizeUsername);
-const reverseVal = memoFunc(theReverseVal);
-const removeUniqueKeyStr = memoFunc(theRemoveUniqueKeyStr);
 
 
 export {
@@ -137,6 +137,6 @@ export {
   setCustomCookie, 
   removeUniqueKeyStr, 
   reverseVal, 
-  capitalizeUsername, 
-  formatDate
+  formatDate,
+  capitalizeUsername 
 };

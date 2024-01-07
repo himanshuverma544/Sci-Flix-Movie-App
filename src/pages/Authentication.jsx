@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 
 import { useState, useRef, useCallback } from "react";
-import { capitalizeUsername, setCustomCookie, clearCustomCookie } from "../customFunctions";
+import { capitalizeUsername, setCustomCookie, clearCustomCookie } from "../functions";
 
 import { Container, Form, FormGroup, Input, Button } from "reactstrap";
 import { toast } from "react-toastify";

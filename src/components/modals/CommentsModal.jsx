@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addComment, editComment } from "../../redux/moviesComments";
 
 import { DEFAULT_USER, REPRESENTING_YOU, ADD_COMMENT, EDIT_COMMENT } from "../../constants";
-import { reverseVal, capitalizeUsername } from "../../customFunctions";
+import { reverseVal, capitalizeUsername } from "../../functions";
 
 
 const CommentsModal = ({commentReqDetails: { signedInUser: currentSignedInUser , movieName }, commentsModalCommentsNode, closeCommentsModal}) => {

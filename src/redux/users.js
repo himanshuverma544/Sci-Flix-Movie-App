@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 import { DEFAULT_USER, CNAME_SIGNED_IN_USER } from "../constants";
-import { getCustomCookieValue } from "../customFunctions";
+import { getCustomCookieValue } from "../functions";
 
 
 const currentSignedInUser = getCustomCookieValue(CNAME_SIGNED_IN_USER);
