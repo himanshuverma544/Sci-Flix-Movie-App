@@ -25,30 +25,24 @@ const Layout = () => {
           <header>
             <nav className="movie-app-navbar">
               <ul>
-                <li>
-                  <SmartNavLink
-                    path={HOME.pathname}
-                    icon={<HiOutlineHome/>}
-                    title={HOME.title}
-                  />
-                </li>
-                <li>
-                  <SmartNavLink
-                    path={MOVIES.pathname}
-                    icon={<BiCameraMovie/>}
-                    title={MOVIES.title}
-                  />
-                </li>
-                <li>
-                  <SmartNavLink 
-                    path={AUTHENTICATION.pathname}
-                    icon={<FiUser/>}
-                    title={ signedInUser === DEFAULT_USER.username ? 
-                      AUTHENTICATION.signInTitle : 
-                      AUTHENTICATION.signOutTitle
-                    }
-                  />
-                </li>
+                <SmartNavLink
+                  path={HOME.pathname}
+                  icon={<HiOutlineHome className="home-icon"/>}
+                  title={HOME.title}
+                />    
+                <SmartNavLink
+                  path={MOVIES.pathname}
+                  icon={<BiCameraMovie className="movies-icon"/>}
+                  title={MOVIES.title}
+                />
+                <SmartNavLink 
+                  path={AUTHENTICATION.pathname}
+                  icon={<FiUser className="auth-icon"/>}
+                  title={ signedInUser === DEFAULT_USER.username ? 
+                    AUTHENTICATION.signInTitle : 
+                    AUTHENTICATION.signOutTitle
+                  }
+                />             
               </ul>
             </nav>
           </header>
