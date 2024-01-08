@@ -1,22 +1,19 @@
 /* General */
 
-*,
-*::after,
-*::before {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
-
 ul {
   list-style: none;
+  margin-bottom: 0 !important;
+}
+
+a {
+  text-decoration: none !important;
 }
 
 .master-cont {
   display: grid;
   grid-template-rows: auto 1fr auto;
   min-height: 100vh;
-  margin-top: 97px;
+  padding-top: 80px;
 }
 
 .btn-bg-color {
