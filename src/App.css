@@ -422,6 +422,10 @@ footer {
   }
 }
 
+.sort-by-dropdown:focus {
+  box-shadow: 0 0 1px 4px rgb(136, 184, 254, 0.7);
+}
+
 .sort-by-dropdown-menu {
   width: 100%;
 }
