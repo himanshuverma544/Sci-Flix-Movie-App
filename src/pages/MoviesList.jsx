@@ -1,5 +1,7 @@
-import { Container, Row, Col, Form, FormGroup, Input, Button, InputGroup, Label } from "reactstrap";
-import Select from "react-select";
+import { Container, Row, Col, Form, FormGroup, InputGroup, Label, Input, 
+        Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Button
+      } from "reactstrap";
+
 import { AiOutlineSearch } from "react-icons/ai";
 import { BiSortAlt2 } from "react-icons/bi";
 
@@ -7,14 +9,12 @@ import { useState, useEffect, useCallback } from "react";
 
 import { useQuery } from "react-query";
 
-import { SORT_OPTIONS } from "../constants";
-import { fetchMovies } from "../functions";
-
 import MoviesGridView from"../components/MoviesGridView";
+import { fetchMovies } from "../functions";
+import { DEFAULT_DROPDOWN_TOGGLE_TEXT, SORT_OPTIONS } from "../constants";
 
 
 const MoviesList = () => {
-  
 
   const { 
     data: movies, 
@@ -24,9 +24,26 @@ const MoviesList = () => {
     queryKey: ["movies"],
     queryFn: fetchMovies
   });
-  
-  const [sortedMovies, setSortedMovies] = useState([]);
 
+
+  const [dropdown, setDropdown] = useState({
+    toggleText: DEFAULT_DROPDOWN_TOGGLE_TEXT,
+    openStatus: false
+  });
+
+  const toggleOpenStatus = useCallback(() =>
+    setDropdown(prev => {
+      return {...prev, openStatus: !prev.openStatus}
+    })
+  , []);
+
+  const selectedDropdownItem = useCallback(sortByTitle => 
+    setDropdown(prev => {
+      return {...prev, toggleText: sortByTitle}
+    })
+  , []);
+
+  const [sortedMovies, setSortedMovies] = useState([]);
 
   useEffect(() => {
 
@@ -39,17 +56,17 @@ const MoviesList = () => {
     }
   }, [isSuccess, movies]);
 
-
   const handleSortOrder = useCallback(() => 
     setSortedMovies(prev => [...prev].reverse())
   , []);
 
-
-  const handleSortBy = useCallback(sortBy => 
+  const handleSortBy = useCallback((sortByTitle, sortByValue) => {
+    selectedDropdownItem(sortByTitle);
     setSortedMovies(prev => [...prev].sort((a, b) =>
-      a[sortBy] < b[sortBy] ? -1 : (a[sortBy] > b[sortBy] ? 1 : 0)
-    ))
-  , []);
+      a[sortByValue] < b[sortByValue] ? -1 : (a[sortByValue] > b[sortByValue] ? 1 : 0)
+    ));
+  }
+  , [selectedDropdownItem]);
 
 
   const handleSearch = useCallback(searchedKeyword => {
@@ -67,8 +84,8 @@ const MoviesList = () => {
   return ( 
     <Container>
       <Row>
-        <Col>
-          <Form className="filter-container mt-4" onSubmit={event => event.preventDefault()}>
+        <Col sm={6}>
+          <Form className="search-movies-filter" onSubmit={event => event.preventDefault()}>
             <FormGroup className="search-movies-group">
               <InputGroup>
                 <Input
@@ -84,14 +101,35 @@ const MoviesList = () => {
                 </Button>
               </InputGroup>
             </FormGroup>
+          </Form>
+        </Col>
+        <Col sm={6}>
+          <Form className="sort-by-filter">
             <FormGroup className="sort-by-group">
               <InputGroup className="select-input-group">
-                <Label className="sort-by-label ">Sort By</Label>
-                <Select
-                  className="sort-by-select"
-                  options={ SORT_OPTIONS }
-                  onChange={event => handleSortBy(event.value)}
-                />
+                <Dropdown isOpen={dropdown.openStatus} toggle={toggleOpenStatus}>
+                  <DropdownToggle 
+                    className="sort-by-dropdown" 
+                    style={{ color: (DEFAULT_DROPDOWN_TOGGLE_TEXT === dropdown.toggleText) ? "#6e6b6b" : "#000" }} 
+                    caret
+                  >
+                    {dropdown.toggleText}
+                  </DropdownToggle>
+                  <DropdownMenu className="sort-by-dropdown-menu">
+                    {SORT_OPTIONS.map((option, index) => (
+                      <DropdownItem 
+                        key={index} 
+                        className="py-2" 
+                        data-value={option.value} 
+                        onClick={event => 
+                          handleSortBy(event.target.innerText, event.target.getAttribute("data-value"))
+                        }
+                      >
+                        {option.title}
+                      </DropdownItem>
+                    ))}
+                  </DropdownMenu>
+                </Dropdown>
               </InputGroup>
               <Button 
                 className="sort-order-btn ms-3 btn-bg-color" 
@@ -110,3 +148,10 @@ const MoviesList = () => {
 }
 
 export default MoviesList;
+
+         {/* <Label className="sort-by-label ">Sort By</Label> */}
+                {/* <Select
+                  className="sort-by-select"
+                  options={ SORT_OPTIONS }
+                  onChange={event => handleSortBy(event.value)}
+                /> */}
