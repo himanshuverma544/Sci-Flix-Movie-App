@@ -148,10 +148,3 @@ const MoviesList = () => {
 }
 
 export default MoviesList;
-
-         {/* <Label className="sort-by-label ">Sort By</Label> */}
-                {/* <Select
-                  className="sort-by-select"
-                  options={ SORT_OPTIONS }
-                  onChange={event => handleSortBy(event.value)}
-                /> */}
