@@ -15,7 +15,6 @@
   justify-content: space-evenly;
   align-items: center;
   padding: 12px;
-
   @media (max-width: 575px) {  
     column-gap: 30px;
     padding: 0;
@@ -24,7 +23,6 @@
 
 .movie-app-navbar ul li {
   font-size: 1.2rem;
-
   @media (max-width: 575px) {
     font-size: 0.9rem;
   }
@@ -53,7 +51,6 @@
   justify-content: center;
   align-items: center;
   column-gap: 10px;
-
   @media (max-width: 575px) {    
     flex-direction: column;
   }
@@ -68,7 +65,6 @@ footer {
   font-size: 1.25rem;
   background-color: #1c1c1c;
   color: #FFF;
-
   @media (max-width: 575px) {
     font-size: 1rem;
   }
@@ -363,7 +359,7 @@ footer {
 }
 
 
-/* Authentication */
+/* Authentication Page */
 
 .auth-form-cont {
   display: flex;
@@ -382,25 +378,55 @@ footer {
 
 /* Filter */
 
-.filter-container {
+.search-movies-filter {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
 }
 
 .search-movies-group {
-  width: 30%;
+  @media (max-width: 575px) {
+    width: 100%;
+  }
 }
 
-.search-movies-btn, .sort-order-btn {
+.search-movies-btn, 
+.sort-order-btn {
   z-index: 1 !important;
+}
+
+.sort-by-filter {
+  display: flex;
+  justify-content: center;
 }
 
 .sort-by-group {
   display: flex;
-  width: 36%;
+  @media (max-width: 575px) {
+    width: 100%;
+  }
 }
 
-.sort-by-label {
+.sort-by-dropdown {
+  width: 191px; /* To make sort by group exactly equal to the search group */
+  text-align: start !important;
+  position: relative;
+  background: none !important;
+  border-color: #c2c1c1 !important;
+  &::after {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+  }
+  @media (max-width: 575px) {
+    width: 100%;
+  }
+}
+
+.sort-by-dropdown-menu {
+  width: 100%;
+}
+
+/* .sort-by-label {
   padding: 6px 20px;
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-top-left-radius: 4px;
@@ -408,7 +434,7 @@ footer {
 }
 
 .sort-by-select {
-  width: 73%;
+  width: 60%;
 }
 
 .sort-by-select .css-13cymwt-control {
@@ -429,11 +455,7 @@ footer {
 .sort-by-select .css-1n6sfyn-MenuList > *:hover {
   background-color: #1c1c1c;
   color: #FFF;
-}
-
-.sort-order-btn {
-  height: 38px;
-}
+} */
 
 
 /* 404 Page */
