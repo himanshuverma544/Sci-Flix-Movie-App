@@ -411,7 +411,7 @@ footer {
   text-align: start !important;
   position: relative;
   background: none !important;
-  border-color: #c2c1c1 !important;
+  border-color: #ced4da !important;
   &::after {
     position: absolute;
     top: 15px;
