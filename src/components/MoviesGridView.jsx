@@ -14,7 +14,14 @@ import EditModal from "./modals/EditModal";
 import DeleteModal from "./modals/DeleteModal";
 import CommentsModal from "./modals/CommentsModal";
 
-import { DEFAULT_USER, HOME, MOVIES, AUTHENTICATION } from "../constants";
+import { 
+  DEFAULT_USER, 
+  HOME, 
+  MOVIES, 
+  AUTHENTICATION
+} 
+from "../constants";
+
 import { formatDate } from "../functions";
 
 
@@ -219,13 +226,17 @@ const MoviesGridView = ({movies}) => {
                   </CardText>
                   <div className="btns-container">
                     <Button 
-                      className="watch-trailer-btn btn-bg-color" 
+                      className="watch-trailer-btn" 
+                      block
+                      color="dark"
                       onClick={() => openVideoModal(movie.trailer_link)}
                     >
                       Watch Trailer
                     </Button>
                     <Button
-                      className="read-desc-btn btn-bg-color mt-2" 
+                      className="read-desc-btn mt-2" 
+                      block
+                      color="dark"
                       onClick={() => openDescriptionModal({
                         name: movie.name,
                         description: movie.description
@@ -235,7 +246,9 @@ const MoviesGridView = ({movies}) => {
                     </Button>
                     { pathname === MOVIES.pathname &&
                       <Button 
-                        className="comment-btn btn-bg-color mt-2" 
+                        className="comment-btn mt-2" 
+                        block
+                        color="dark"
                         onClick={() => openCommentsModal({
                           signedInUser,
                           movieName: movie.name,

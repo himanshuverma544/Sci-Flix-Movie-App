@@ -93,7 +93,7 @@ const Home = () => {
       <MoviesGridView movies={movies}/>
       <Row className="mt-4">
         <Col className="regenerate-col">
-          <Button className="regenerate-btn btn-bg-color" onClick={regenerateMovies}>
+          <Button className="regenerate-btn btn-bg-color" block onClick={regenerateMovies}>
             Regenerate Movies
           </Button>
         </Col>
