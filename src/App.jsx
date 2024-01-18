@@ -6,7 +6,7 @@ import { HashRouter, Routes, Route } from 'react-router-dom';
 
 import Layout from './pages/Layout';
 import Home from './pages/Home';
-import MoviesList from './pages/MoviesList';
+import Movies from './pages/Movies';
 import Page404 from './pages/Page404';
 import Authentication from './pages/Authentication';
 
@@ -19,7 +19,7 @@ function App() {
       <Routes>
         <Route path={HOME.pathname} element={<Layout/>}>
           <Route index element={<Home/>}/>
-          <Route path={MOVIES.pathname} element={<MoviesList/>}/>
+          <Route path={MOVIES.pathname} element={<Movies/>}/>
           <Route path={AUTHENTICATION.pathname} element={<Authentication/>}/>
           <Route path={PAGE404.pathname} element={<Page404/>}/>
         </Route>
