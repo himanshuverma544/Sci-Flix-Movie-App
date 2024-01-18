@@ -1,6 +1,18 @@
-import { Container, Row, Col, Form, FormGroup, InputGroup, Label, Input, 
-        Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Button
-      } from "reactstrap";
+import { 
+  Container, 
+  Row, 
+  Col, 
+  Form, 
+  FormGroup, 
+  InputGroup, 
+  Input, 
+  Dropdown, 
+  DropdownToggle, 
+  DropdownMenu, 
+  DropdownItem, 
+  Button
+} 
+from "reactstrap";
 
 import { AiOutlineSearch } from "react-icons/ai";
 import { BiSortAlt2 } from "react-icons/bi";
@@ -10,11 +22,19 @@ import { useState, useEffect, useCallback } from "react";
 import { useQuery } from "react-query";
 
 import MoviesGridView from"../components/MoviesGridView";
+
+import { 
+  DEFAULT_DROPDOWN_TOGGLE_TEXT, 
+  SORT_OPTIONS, 
+  DEFAULT_TEXT_COLOR, 
+  PLACEHOLDER_TEXT_COLOR 
+} 
+from "../constants";
+
 import { fetchMovies } from "../functions";
-import { DEFAULT_DROPDOWN_TOGGLE_TEXT, SORT_OPTIONS } from "../constants";
 
 
-const MoviesList = () => {
+const Movies = () => {
 
   const { 
     data: movies, 
@@ -26,24 +46,12 @@ const MoviesList = () => {
   });
 
 
+  const [sortedMovies, setSortedMovies] = useState([]);
+
   const [dropdown, setDropdown] = useState({
     toggleText: DEFAULT_DROPDOWN_TOGGLE_TEXT,
     openStatus: false
   });
-
-  const toggleOpenStatus = useCallback(() =>
-    setDropdown(prev => {
-      return {...prev, openStatus: !prev.openStatus}
-    })
-  , []);
-
-  const selectedDropdownItem = useCallback(sortByTitle => 
-    setDropdown(prev => {
-      return {...prev, toggleText: sortByTitle}
-    })
-  , []);
-
-  const [sortedMovies, setSortedMovies] = useState([]);
 
   useEffect(() => {
 
@@ -58,6 +66,18 @@ const MoviesList = () => {
 
   const handleSortOrder = useCallback(() => 
     setSortedMovies(prev => [...prev].reverse())
+  , []);
+
+  const toggleOpenStatus = useCallback(() =>
+    setDropdown(prev => {
+      return {...prev, openStatus: !prev.openStatus}
+    })
+  , []);
+
+  const selectedDropdownItem = useCallback(sortByTitle => 
+    setDropdown(prev => {
+      return {...prev, toggleText: sortByTitle}
+    })
   , []);
 
   const handleSortBy = useCallback((sortByTitle, sortByValue) => {
@@ -85,7 +105,7 @@ const MoviesList = () => {
     <Container>
       <Row>
         <Col sm={6}>
-          <Form className="search-movies-filter" onSubmit={event => event.preventDefault()}>
+          <Form className="search-movies-filter" onClick={event => event.preventDefault()}>
             <FormGroup className="search-movies-group">
               <InputGroup>
                 <Input
@@ -110,7 +130,10 @@ const MoviesList = () => {
                 <Dropdown isOpen={dropdown.openStatus} toggle={toggleOpenStatus}>
                   <DropdownToggle 
                     className="sort-by-dropdown" 
-                    style={{ color: (DEFAULT_DROPDOWN_TOGGLE_TEXT === dropdown.toggleText) ? "#6e6b6b" : "#000" }} 
+                    style={{ color: (DEFAULT_DROPDOWN_TOGGLE_TEXT === dropdown.toggleText) ?
+                      PLACEHOLDER_TEXT_COLOR : 
+                      DEFAULT_TEXT_COLOR
+                    }} 
                     caret
                   >
                     {dropdown.toggleText}
@@ -120,9 +143,8 @@ const MoviesList = () => {
                       <DropdownItem 
                         key={index} 
                         className="py-2" 
-                        data-value={option.value} 
                         onClick={event => 
-                          handleSortBy(event.target.innerText, event.target.getAttribute("data-value"))
+                          handleSortBy(event.target.innerText, option.value)
                         }
                       >
                         {option.title}
@@ -147,4 +169,4 @@ const MoviesList = () => {
   );
 }
 
-export default MoviesList;
+export default Movies;
