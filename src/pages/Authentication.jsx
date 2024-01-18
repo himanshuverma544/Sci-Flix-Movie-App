@@ -1,16 +1,25 @@
 import { useNavigate } from "react-router-dom";
 
 import { useState, useRef, useCallback } from "react";
-import { capitalizeUsername, setCustomCookie, clearCustomCookie } from "../functions";
-
-import { Container, Form, FormGroup, Input, Button } from "reactstrap";
-import { toast } from "react-toastify";
 
 import { useDispatch, useSelector } from "react-redux";
-import { addNewUser } from "../redux/usersMovies";
 import { signUp, signIn, signOut } from "../redux/users";
+import { addNewUser } from "../redux/usersMovies";
 
-import { DEFAULT_USER, AUTHENTICATION, CNAME_SIGNED_IN_USER } from "../constants";
+import { Container, Form, FormGroup, Input, Button, FormText } from "reactstrap";
+import { toast } from "react-toastify";
+
+import { capitalizeUsername, setCustomCookie, clearCustomCookie } from "../functions";
+
+import { 
+  DEFAULT_USER, 
+  SIGN_IN, 
+  SIGN_UP, 
+  SIGN_OUT, 
+  AS_PER, 
+  CNAME_SIGNED_IN_USER 
+} 
+from "../constants";
 
 
 const Authentication = () => {
@@ -21,7 +30,14 @@ const Authentication = () => {
   const userDispatch = userMovieDispatch;
   const { users: existingUsers, signedInUser } = useSelector(state => state.usersReducer);
 
-  const [status, setStatus] = useState(signedInUser === DEFAULT_USER.username ? AUTHENTICATION.signInTitle : AUTHENTICATION.signOutTitle);
+  const [status, setStatus] = useState(signedInUser === DEFAULT_USER.username ?
+    SIGN_IN.name :
+    SIGN_OUT.name
+  );
+
+  const isStatusSignOut = useCallback(() => (
+    status === SIGN_OUT.name
+  ), [status]);
 
   const usernameNode = useRef(null);
   const passwordNode = useRef(null);
@@ -34,15 +50,15 @@ const Authentication = () => {
       existingUser.username === currentUsername
     ));
 
-    return existingUser; 
-
+    return existingUser;
   }, [existingUsers]);
 
+  
   const handleSubmit = useCallback(event => {
 
     event.preventDefault();
 
-    if (status === AUTHENTICATION.signUpTitle) {
+    if (status === SIGN_UP.name) {
 
       const username = usernameNode.current.value.toLowerCase();
       const password = passwordNode.current.value;
@@ -61,23 +77,27 @@ const Authentication = () => {
         toast("Passwords do not match", {type: "error"});
       }
       else if (password === confirmPassword) {    
-        userDispatch(signUp({
-          username,
-          password
-        }));
-        userMovieDispatch(addNewUser({
-          username
-        }));
+        userDispatch(
+          signUp({
+            username,
+            password
+          })
+        );
+        userMovieDispatch(
+          addNewUser({
+            username
+          })
+        );
         
         setCustomCookie(CNAME_SIGNED_IN_USER, username);
 
         toast("Signed Up Successfully", {type: "success"});
-        setStatus(AUTHENTICATION.signOutTitle);
+        setStatus(SIGN_OUT.name);
         navigate("/");
       } 
     }
 
-    else if (status === AUTHENTICATION.signInTitle ) {
+    else if (status === SIGN_IN.name) {
 
       const username = usernameNode.current.value.toLowerCase();
       const password = passwordNode.current.value;
@@ -92,51 +112,44 @@ const Authentication = () => {
           toast("Incorrect password", {type: "error"});
         }
         else if (existingPassword === password) {
-          userDispatch(signIn({ 
-            username,
-            password 
-          }));
+          userDispatch(
+            signIn({ 
+              username,
+              password 
+            })
+          );
 
           setCustomCookie(CNAME_SIGNED_IN_USER, username);
 
           toast("Signed In Successfully", {type: "success"});
-          setStatus(AUTHENTICATION.signOutTitle);
+          setStatus(SIGN_OUT.name);
           navigate("/");
         }
       }
     }
 
-    else if (status === AUTHENTICATION.signOutTitle) {
+    else if (isStatusSignOut()) {
 
       userDispatch(signOut());
       clearCustomCookie(CNAME_SIGNED_IN_USER);
       toast("Signed Out Successfully", {type: "success"});
-      setStatus(AUTHENTICATION.signInTitle );
+      setStatus(SIGN_IN.name);
     }
     
-  }, [status, getUser, userMovieDispatch, userDispatch, navigate]);
+  }, [status, getUser, userMovieDispatch, userDispatch, navigate, isStatusSignOut]);
 
+  
   return (
-    <Container className="auth-form-cont">
-      {[AUTHENTICATION.signUpTitle, AUTHENTICATION.signInTitle ].includes(status) &&
-        <div className="d-flex justify-content-center mb-3">
-          <Button 
-            className="btn-bg-color me-2" 
-            onClick={() => setStatus(AUTHENTICATION.signInTitle )}
-          >Sign In
-          </Button>
-          <Button 
-            className="btn-bg-color ms-2" 
-            onClick={() => setStatus(AUTHENTICATION.signUpTitle)}
-          >Sign Up
-          </Button>
-        </div>
-      }
-      { AUTHENTICATION.signOutTitle === status && 
-        <h1 className="mb-5">Hello {capitalizeUsername(signedInUser)}</h1> 
-      }
-      <Form onSubmit={event => handleSubmit(event)}>
-        {[AUTHENTICATION.signUpTitle, AUTHENTICATION.signInTitle ].includes(status) &&
+    <Container className="auth-form-cont ">
+      <Form onSubmit={handleSubmit}>
+        <h1 className="form-heading">
+          {`${AS_PER[status].heading} ${isStatusSignOut() ?
+            capitalizeUsername(signedInUser) :
+            ""
+          }`}
+        </h1>
+        <hr/>
+        {!isStatusSignOut() &&
           <>
             <FormGroup>
               <Input
@@ -157,7 +170,7 @@ const Authentication = () => {
                 type="password"
               />
             </FormGroup>
-            {status === AUTHENTICATION.signUpTitle && 
+            {AS_PER[status].show && 
               <FormGroup>
                 <Input
                   id="confirm-password"
@@ -171,8 +184,21 @@ const Authentication = () => {
           </>
         }
         <Button className="btn-bg-color">
-          {status === AUTHENTICATION.signInTitle  ? AUTHENTICATION.signInTitle  : (status === AUTHENTICATION.signUpTitle ? AUTHENTICATION.signUpTitle : AUTHENTICATION.signOutTitle)}
+          {AS_PER[status].name}
         </Button>
+        <hr/>
+        <FormText>
+          {AS_PER[status].switchMsg}
+          {!isStatusSignOut() &&
+            <Button 
+              className="auth-switch-btn"
+              color="link"
+              onClick={() => setStatus(AS_PER[status].switchTitle)}
+            >
+              {AS_PER[status].switchTitle}
+            </Button>
+          }
+        </FormText>
       </Form>
     </Container>
   );
