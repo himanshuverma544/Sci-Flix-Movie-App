@@ -57,14 +57,14 @@ const Authentication = () => {
   const handleSubmit = useCallback(event => {
 
     event.preventDefault();
+    
+    const username = usernameNode.current && usernameNode.current.value.toLowerCase();
+    const password = passwordNode.current && passwordNode.current.value;
+    const confirmPassword = confirmPasswordNode.current && confirmPasswordNode.current.value;
 
     switch (status) {
       
       case SIGN_UP.name:
-
-        const username = usernameNode.current.value.toLowerCase();
-        const password = passwordNode.current.value;
-        const confirmPassword = confirmPasswordNode.current.value;
 
         if (username.includes(DEFAULT_USER.username)) {
           toast(`Using ${DEFAULT_USER.username} for the username is not allowed`, {type: "warning"});
