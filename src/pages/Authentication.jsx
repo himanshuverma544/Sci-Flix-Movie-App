@@ -35,7 +35,7 @@ const Authentication = () => {
     SIGN_OUT.name
   );
 
-  const isStatusSignOut = useCallback(() => (
+  const isAuthenticated = useCallback(() => (
     status === SIGN_OUT.name
   ), [status]);
 
@@ -58,98 +58,101 @@ const Authentication = () => {
 
     event.preventDefault();
 
-    if (status === SIGN_UP.name) {
-
-      const username = usernameNode.current.value.toLowerCase();
-      const password = passwordNode.current.value;
-      const confirmPassword = confirmPasswordNode.current.value;
-
-      if (username.includes(DEFAULT_USER.username)) {
-        toast(`Using ${DEFAULT_USER.username} for the username is not allowed`, {type: "warning"});
-      }
-      else if (getUser(username)) {
-        toast("Username already exists", {type: "error"});
-      }
-      else if (username.length < 4 || password.length < 8) {
-        toast("Username and Password length must be equal to and greater than 4 and 8 respectively", {type: "error"});
-      }
-      else if (password !== confirmPassword) {
-        toast("Passwords do not match", {type: "error"});
-      }
-      else if (password === confirmPassword) {    
-        userDispatch(
-          signUp({
-            username,
-            password
-          })
-        );
-        userMovieDispatch(
-          addNewUser({
-            username
-          })
-        );
-        
-        setCustomCookie(CNAME_SIGNED_IN_USER, username);
-
-        toast("Signed Up Successfully", {type: "success"});
-        setStatus(SIGN_OUT.name);
-        navigate("/");
-      } 
-    }
-
-    else if (status === SIGN_IN.name) {
-
-      const username = usernameNode.current.value.toLowerCase();
-      const password = passwordNode.current.value;
+    switch (status) {
       
-      if (!getUser(username)) {
-        toast("Username does not exist", {type: "error"});
-      }
-      else if (getUser(username)) {
-        const { password: existingPassword } = getUser(username);
+      case SIGN_UP.name:
 
-        if (existingPassword !== password) {
-          toast("Incorrect password", {type: "error"});
+        const username = usernameNode.current.value.toLowerCase();
+        const password = passwordNode.current.value;
+        const confirmPassword = confirmPasswordNode.current.value;
+
+        if (username.includes(DEFAULT_USER.username)) {
+          toast(`Using ${DEFAULT_USER.username} for the username is not allowed`, {type: "warning"});
         }
-        else if (existingPassword === password) {
+        else if (getUser(username)) {
+          toast("Username already exists", {type: "error"});
+        }
+        else if (username.length < 4 || password.length < 8) {
+          toast("Username and Password length must be equal to and greater than 4 and 8 respectively", {type: "error"});
+        }
+        else if (password !== confirmPassword) {
+          toast("Passwords do not match", {type: "error"});
+        }
+        else if (password === confirmPassword) {    
           userDispatch(
-            signIn({ 
+            signUp({
               username,
-              password 
+              password
             })
           );
-
+          userMovieDispatch(
+            addNewUser({
+              username
+            })
+          );
+          
           setCustomCookie(CNAME_SIGNED_IN_USER, username);
 
-          toast("Signed In Successfully", {type: "success"});
+          toast("Signed Up Successfully", {type: "success"});
           setStatus(SIGN_OUT.name);
           navigate("/");
         }
-      }
-    }
+        break;
 
-    else if (isStatusSignOut()) {
+      case SIGN_IN.name: 
+        
+        if (!getUser(username)) {
+          toast("Username does not exist", {type: "error"});
+        }
+        else if (getUser(username)) {
+          const { password: existingPassword } = getUser(username);
 
-      userDispatch(signOut());
-      clearCustomCookie(CNAME_SIGNED_IN_USER);
-      toast("Signed Out Successfully", {type: "success"});
-      setStatus(SIGN_IN.name);
+          if (existingPassword !== password) {
+            toast("Incorrect password", {type: "error"});
+          }
+          else if (existingPassword === password) {
+            userDispatch(
+              signIn({ 
+                username,
+                password 
+              })
+            );
+
+            setCustomCookie(CNAME_SIGNED_IN_USER, username);
+
+            toast("Signed In Successfully", {type: "success"});
+            setStatus(SIGN_OUT.name);
+            navigate("/");
+          }
+        }
+        break;
+
+      case SIGN_OUT.name:
+
+        userDispatch(signOut());
+        clearCustomCookie(CNAME_SIGNED_IN_USER);
+        toast("Signed Out Successfully", {type: "success"});
+        setStatus(SIGN_IN.name);
+        break;
+
+      default:
+        break;
     }
     
-  }, [status, getUser, userMovieDispatch, userDispatch, navigate, isStatusSignOut]);
+  }, [status, getUser, userMovieDispatch, userDispatch, navigate]);
 
   
   return (
-    <Container className="auth-form-cont ">
-      <Form onSubmit={handleSubmit}>
+    <Container className="auth-form-cont">
+      <Form className="auth-form" onSubmit={handleSubmit}>
         <h1 className="form-heading">
-          {`${AS_PER[status].heading} ${isStatusSignOut() ?
+          {`${AS_PER[status].heading} ${isAuthenticated() ?
             capitalizeUsername(signedInUser) :
             ""
           }`}
         </h1>
         <hr/>
-        {!isStatusSignOut() &&
+        {!isAuthenticated() &&
           <>
             <FormGroup>
               <Input
@@ -189,7 +192,7 @@ const Authentication = () => {
         <hr/>
         <FormText>
           {AS_PER[status].switchMsg}
-          {!isStatusSignOut() &&
+          {!isAuthenticated() &&
             <Button 
               className="auth-switch-btn"
               color="link"
