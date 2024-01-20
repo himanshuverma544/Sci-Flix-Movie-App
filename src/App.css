@@ -239,23 +239,27 @@ footer {
 /* SIGN IN Page */
 
 .auth-form-cont {
-  height: 60dvh;
-  width: 70dvh;
+  height: calc(100dvh - 80.8px - 80px);
+  min-height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.auth-form {
+  width: 437px;
+  max-width: calc(100% - (2 * calc(1.5625vw + 30px)));
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   text-align: center;
+  padding: calc(1.5625vw + 30px);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 
+              0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .form-heading {
   overflow-wrap: anywhere;
-}
-
-.auth-form-cont form {
-  display: flex;
-  flex-direction: column;
-  width: 45%;
 }
 
 .auth-switch-btn {
@@ -266,6 +270,7 @@ footer {
   font-size: inherit !important;
   color: #000 !important;
 }
+
 
 
 /* MODALS */
