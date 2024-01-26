@@ -6,6 +6,7 @@ const DescriptionModal = ({ movieReqDescDetails: { name, description }, descript
     <div className="the-description-modal" onClick={event => closeDescriptionModal(event)}>
       <div ref={descriptionModalTextNode} className="content">
         <h3>{name}</h3>
+        <hr/>
         <p>{description}</p>
       </div>
     </div>,
