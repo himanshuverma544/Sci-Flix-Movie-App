@@ -305,17 +305,28 @@ footer {
 /* Movie Image Modal */
 
 .the-image-modal img {
-  max-height: 95vh;
+  width: 90%;
+  height: auto;
   border-radius: 20px;
 }
 
 
 /* Movie Video Modal */
 
-.the-video-modal .movie-trailer iframe {
-  width: 150vh;
-  height: 80vh;
+.the-video-modal .movie-trailer {
+  display: grid;
+  place-items: center;
+
+& iframe {
+  width: 800px;
+  max-width: calc(100% - 25px);
+  /* max-width: 800px; // This will also work as above CSS
+  width: 90vw; */
+  min-height: 185px;
+  height: 50dvw;
+  max-height: 375px;
   border-radius: 20px;
+}
 }
 
 
@@ -326,16 +337,15 @@ footer {
   flex-direction: column;
   justify-content: center;
   padding: 20px;
-  width: 80vh;
-  height: 30vh;
+  width: 90%;
+  height: auto;
   background-color: #FFF;
   border-radius: 20px;
-}
 
-.the-description-modal .content h3,
-.the-description-modal .content p {
-  text-align: center;
-  padding: 10px;
+  & h3,
+  & p {
+    text-align: center;
+  }
 }
 
 
@@ -355,14 +365,15 @@ footer {
 .user-rating-form-container form {
   display: flex;
   flex-direction: column;
-  width: 70%; 
+  width: 70%;
+
+  & h3,
+  & .form-group,
+  & .form-group input {
+    text-align: center;
+  }
 }
 
-.user-rating-form-container form h3, 
-.user-rating-form-container form .form-group, 
-.user-rating-form-container form .form-group input {
-  text-align: center;
-}
 
 
 /* Movie Delete Modal */
@@ -399,11 +410,22 @@ footer {
 
 .the-comments-modal .comments-container {
   position: relative;
-  width: 50%;
+  width: 90%;
   height: 70%;
   background-color: #FFF;
   border-radius: 7px;
+
+  & .movie-cmt-header hr {
+    margin: 0;
+  }
+
+  & .movie-cmt-name {
+    padding: 15px 10px;
+    text-align: center;
+  }
 }
+
+
 
 .all-comments {
   height: 75%;
