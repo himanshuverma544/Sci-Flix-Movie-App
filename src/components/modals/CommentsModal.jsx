@@ -131,9 +131,13 @@ const CommentsModal = ({commentReqDetails: { signedInUser: currentSignedInUser ,
   
   return createPortal(
     <div className="the-comments-modal" onClick={event => closeCommentsModal(event)}>
-      <div ref={commentsModalCommentsNode} className="comments-container">
-        <h3 className="mt-3 ms-3">{`${movieName} (Comments)`}</h3>
-        <hr/>
+      <div className="comments-container" ref={commentsModalCommentsNode}>
+        <div className="movie-cmt-header">
+          <h3 className="movie-cmt-name">
+            {movieName}
+          </h3>
+          <hr/>
+        </div>
         <div ref={allUsersCommentsNode} className="all-comments">
           <ul>
             {usersComments.map((_, index, arr) => {
