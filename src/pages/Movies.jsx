@@ -22,7 +22,7 @@ import { useState, useEffect, useCallback } from "react";
 import { useQuery } from "react-query";
 
 import MoviesGridView from"../components/MoviesGridView";
-
+import { fetchMovies } from "../functions";
 import { 
   DEFAULT_DROPDOWN_TOGGLE_TEXT, 
   SORT_OPTIONS, 
@@ -30,8 +30,6 @@ import {
   PLACEHOLDER_TEXT_COLOR 
 } 
 from "../constants";
-
-import { fetchMovies } from "../functions";
 
 
 const Movies = () => {
