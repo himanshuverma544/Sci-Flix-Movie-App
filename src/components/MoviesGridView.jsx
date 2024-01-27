@@ -14,6 +14,8 @@ import EditModal from "./modals/EditModal";
 import DeleteModal from "./modals/DeleteModal";
 import CommentsModal from "./modals/CommentsModal";
 
+import { formatDate } from "../functions";
+
 import { 
   DEFAULT_USER, 
   HOME, 
@@ -22,7 +24,6 @@ import {
 } 
 from "../constants";
 
-import { formatDate } from "../functions";
 
 
 const MoviesGridView = ({movies}) => {
@@ -191,8 +192,8 @@ const MoviesGridView = ({movies}) => {
                     alt: movie.name
                   })}
                 >
-                  { pathname === HOME && 
-                    <div className="actions-on-movie d-flex"> 
+                  { pathname === HOME.pathname && 
+                    <div className="actions-on-movie"> 
                       <AiOutlineEdit 
                         className="edit-movie me-2" 
                         onClick={event => openEditModal(event, {
