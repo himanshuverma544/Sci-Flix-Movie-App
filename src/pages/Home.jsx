@@ -8,10 +8,10 @@ import { loadMovies } from "../redux/usersMovies";
 
 import { useQuery } from "react-query";
 
-import { DEFAULT_USER } from "../constants";
-import { fetchMovies, setUsersDataLocally } from "../functions";
-
 import MoviesGridView from "../components/MoviesGridView";
+import { fetchMovies, setUsersDataLocally } from "../functions";
+import { DEFAULT_USER } from "../constants";
+
 
 
 const Home = () => {
