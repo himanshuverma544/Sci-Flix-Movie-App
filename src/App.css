@@ -283,23 +283,32 @@ footer {
 
 /* MODALS */
 
-.the-image-modal, 
-.the-video-modal, 
-.the-description-modal, 
-.the-edit-modal, 
-.the-delete-modal, 
-.the-comments-modal {
+.overlay {
   display: flex;
   justify-content: center;
   align-items: center;
   position: fixed;
-  z-index: 3;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+  z-index: 3;
+  overflow: auto;
   background-color: rgba(0, 0, 0, 0.8);
+
+  & .close-modal-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 15px 15px 0 0;
+    transition: transform 0.2s ease-in-out;
+  }
+
+  & .close-modal-btn:hover {
+    transform: scale(1.1);
+  }
 }
+
 
 
 /* Movie Image Modal */
@@ -317,16 +326,22 @@ footer {
   display: grid;
   place-items: center;
 
-& iframe {
-  width: 800px;
-  max-width: calc(100% - 25px);
-  /* max-width: 800px; // This will also work as above CSS
-  width: 90vw; */
-  min-height: 185px;
-  height: 50dvw;
-  max-height: 375px;
-  border-radius: 20px;
-}
+  & iframe {
+    width: 800px;
+    max-width: calc(100% - 25px);
+    /* 
+      max-width: 800px; // this will also work for the width, as above CSS trick
+      width: 90vw; // instead of vw units it can be percentage too
+    */
+    min-height: 185px;
+    height: 50dvw;
+    max-height: 375px;
+    /*
+      height: 500px; // this will also work for the height, as above CSS trick
+      max-height: calc(100% - 50px);
+    */
+    border-radius: 20px;
+  }
 }
 
 
@@ -424,8 +439,6 @@ footer {
     text-align: center;
   }
 }
-
-
 
 .all-comments {
   height: 75%;
