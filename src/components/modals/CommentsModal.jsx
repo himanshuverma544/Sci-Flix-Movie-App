@@ -4,19 +4,18 @@ import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 
 import { v4 as getUniqueKey } from "uuid";
 
+import { Form, FormGroup, InputGroup, Input, Button, CloseButton } from "reactstrap";
 import { AiOutlineEdit, AiOutlineSend } from "react-icons/ai";
-import { Form, FormGroup, Input, Button, InputGroup } from "reactstrap";
 
 import { useDispatch, useSelector } from "react-redux";
 import { addComment, editComment } from "../../redux/moviesComments";
 
-import { DEFAULT_USER, REPRESENTING_YOU, ADD_COMMENT, EDIT_COMMENT } from "../../constants";
 import { reverseVal, capitalizeUsername } from "../../functions";
+import { DEFAULT_USER, REPRESENTING_YOU, ADD_COMMENT, EDIT_COMMENT } from "../../constants";
 
 
 const CommentsModal = ({commentReqDetails: { signedInUser: currentSignedInUser , movieName }, commentsModalCommentsNode, closeCommentsModal}) => {
   
-
   let currentDefaultUser = sessionStorage.getItem("currentDefaultUser");
 
   if (currentSignedInUser === DEFAULT_USER.username) {
@@ -130,7 +129,12 @@ const CommentsModal = ({commentReqDetails: { signedInUser: currentSignedInUser ,
 
   
   return createPortal(
-    <div className="the-comments-modal" onClick={event => closeCommentsModal(event)}>
+    <div className="the-comments-modal overlay" onClick={event => closeCommentsModal(event)}>
+      <CloseButton 
+        className="close-modal-btn" 
+        variant="white"
+        onClick={event => closeCommentsModal(event)}
+      />
       <div className="comments-container" ref={commentsModalCommentsNode}>
         <div className="movie-cmt-header">
           <h3 className="movie-cmt-name">

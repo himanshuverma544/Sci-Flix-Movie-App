@@ -1,4 +1,4 @@
-import { Button } from "reactstrap";
+import { Button, CloseButton } from "reactstrap";
 import { toast } from "react-toastify";
 
 import { createPortal } from "react-dom";
@@ -37,7 +37,12 @@ const DeleteModal = ({ movieReqDeletingDetails: { signedInUser, id, name }, dele
 
 
   return createPortal(
-    <div className="the-delete-modal" onClick={event => closeDeleteModal(event)}>
+    <div className="the-delete-modal overlay" onClick={event => closeDeleteModal(event)}>
+      <CloseButton 
+        className="close-modal-btn"
+        variant="white"
+        onClick={event => closeDeleteModal(event)}
+      />
       <div ref={deleteModalDeleteNode} className="confirm-box">
         <h3>{name}</h3>
         <p className="mt-3">Are you sure you want to delete this movie?</p>

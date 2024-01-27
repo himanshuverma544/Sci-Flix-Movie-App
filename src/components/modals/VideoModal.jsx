@@ -1,11 +1,19 @@
 import { createPortal } from "react-dom";
 
+import { CloseButton } from "reactstrap";
+
+
 const VideoModal = ({ movieTrailerUrl, videoModalMovieTrailerNode, closeVideoModal }) => {
   
   const movieTrailerId = movieTrailerUrl.substring(17);
 
   return createPortal(
-    <div className="the-video-modal" onClick={event => closeVideoModal(event)}>
+    <div className="the-video-modal overlay" onClick={event => closeVideoModal(event)}>
+      <CloseButton 
+        className="close-modal-btn"
+        variant="white"
+        onClick={event => closeVideoModal(event)}
+      />
       <div ref={videoModalMovieTrailerNode} className="movie-trailer">
         <iframe  
           title="YouTube Video Player" 
@@ -20,4 +28,3 @@ const VideoModal = ({ movieTrailerUrl, videoModalMovieTrailerNode, closeVideoMod
 }
 
 export default VideoModal;
-

@@ -1,12 +1,11 @@
-import { createPortal } from "react-dom";
+import { Form, FormGroup, Label, Input, Button, CloseButton } from "reactstrap";
+import { toast } from "react-toastify";
 
+import { createPortal } from "react-dom";
 import { useRef, useCallback } from "react";
 
 import { useDispatch } from "react-redux";
 import { editMovie } from "../../redux/usersMovies";
-
-import { Form, FormGroup, Label, Input, Button } from "reactstrap";
-import { toast } from "react-toastify";
 
 
 const EditModal = ({ movieReqRatingDetails: { signedInUser: currentSignedInUser, id, name, rating}, editModalRatingNode, closeEditModal }) => {
@@ -40,7 +39,12 @@ const EditModal = ({ movieReqRatingDetails: { signedInUser: currentSignedInUser,
 
 
   return createPortal(
-    <div className="the-edit-modal" onClick={event => closeEditModal(event)}>
+    <div className="the-edit-modal overlay" onClick={event => closeEditModal(event)}>
+      <CloseButton 
+        className="close-modal-btn"
+        variant="white"
+        onClick={event => closeEditModal(event)}
+      />
       <div ref={editModalRatingNode} className="user-rating-form-container">
         <Form onSubmit={event => handleEdit(event)}>
           <h3 className="mb-3">{name}</h3>
