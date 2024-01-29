@@ -2,18 +2,24 @@ import { createPortal } from "react-dom";
 
 import { CloseButton } from "reactstrap";
 
+import { useCloseModalByKey } from "../../customHooks";
+
 
 const ImageModal = ({ movieImage, imageModalImageNode, closeImageModal }) => {
 
+  useCloseModalByKey(closeImageModal);
+
   return createPortal(
-    <div className="the-image-modal overlay" onClick={event => closeImageModal(event)}>
-      <CloseButton 
-        className="close-modal-btn"
-        variant="white"
-        onClick={event => closeImageModal(event)}
-      />
-      <img ref={imageModalImageNode} src={movieImage.url} alt={movieImage.alt}/>
-    </div>,
+    <section>
+      <div className="the-image-modal overlay" onClick={closeImageModal}>
+        <CloseButton 
+          className="close-modal-btn"
+          variant="white"
+          onClick={closeImageModal}
+        />
+        <img ref={imageModalImageNode} src={movieImage.url} alt={movieImage.alt}/>
+      </div>
+    </section>,
     document.getElementById("image-modal")
   );
 }

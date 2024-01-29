@@ -10,12 +10,16 @@ import { AiOutlineEdit, AiOutlineSend } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { addComment, editComment } from "../../redux/moviesComments";
 
+import { useCloseModalByKey } from "../../customHooks";
 import { reverseVal, capitalizeUsername } from "../../functions";
 import { DEFAULT_USER, REPRESENTING_YOU, ADD_COMMENT, EDIT_COMMENT } from "../../constants";
 
 
+
 const CommentsModal = ({commentReqDetails: { signedInUser: currentSignedInUser , movieName }, commentsModalCommentsNode, closeCommentsModal}) => {
   
+  useCloseModalByKey(closeCommentsModal);
+
   let currentDefaultUser = sessionStorage.getItem("currentDefaultUser");
 
   if (currentSignedInUser === DEFAULT_USER.username) {
@@ -129,77 +133,79 @@ const CommentsModal = ({commentReqDetails: { signedInUser: currentSignedInUser ,
 
   
   return createPortal(
-    <div className="the-comments-modal overlay" onClick={event => closeCommentsModal(event)}>
-      <CloseButton 
-        className="close-modal-btn" 
-        variant="white"
-        onClick={event => closeCommentsModal(event)}
-      />
-      <div className="comments-container" ref={commentsModalCommentsNode}>
-        <div className="movie-cmt-header">
-          <h3 className="movie-cmt-name">
-            {movieName}
-          </h3>
-          <hr/>
-        </div>
-        <div ref={allUsersCommentsNode} className="all-comments">
-          <ul>
-            {usersComments.map((_, index, arr) => {
-              const { commentId, username: commentUsername, userComment } = reverseVal(index, arr);
-              return (
-                <li key={commentId} data-id={commentId}>
-                  <span className="comment-username ms-3 me-2">
-                    { !commentUsername.includes(DEFAULT_USER.username)     // current signed in user comment
-                      && currentSignedInUser === commentUsername
-                      ? `${capitalizeUsername(commentUsername)} (${REPRESENTING_YOU})`
+    <section>
+      <div className="the-comments-modal overlay" onClick={closeCommentsModal}>
+        <CloseButton 
+          className="close-modal-btn" 
+          variant="white"
+          onClick={closeCommentsModal}
+        />
+        <div className="comments-container" ref={commentsModalCommentsNode}>
+          <div className="movie-cmt-header">
+            <h3 className="movie-cmt-name">
+              {movieName}
+            </h3>
+            <hr/>
+          </div>
+          <div ref={allUsersCommentsNode} className="all-comments">
+            <ul>
+              {usersComments.map((_, index, arr) => {
+                const { commentId, username: commentUsername, userComment } = reverseVal(index, arr);
+                return (
+                  <li key={commentId} data-id={commentId}>
+                    <span className="comment-username ms-3 me-2">
+                      { !commentUsername.includes(DEFAULT_USER.username)     // current signed in user comment
+                        && currentSignedInUser === commentUsername
+                        ? `${capitalizeUsername(commentUsername)} (${REPRESENTING_YOU})`
 
-                      : (currentSignedInUser !== commentUsername      // signed in users comments
-                      && !commentUsername.includes(DEFAULT_USER.username)
-                      ? capitalizeUsername(commentUsername) 
+                        : (currentSignedInUser !== commentUsername      // signed in users comments
+                        && !commentUsername.includes(DEFAULT_USER.username)
+                        ? capitalizeUsername(commentUsername) 
 
-                      : (currentSignedInUser === commentUsername      // current default signed in user comment     
-                      ? REPRESENTING_YOU
-                      : capitalizeUsername(DEFAULT_USER.username)))      // all default users comments
+                        : (currentSignedInUser === commentUsername      // current default signed in user comment     
+                        ? REPRESENTING_YOU
+                        : capitalizeUsername(DEFAULT_USER.username)))      // all default users comments
+                      }
+                    </span>
+                    <span className="user-comment">{userComment}</span>
+                    {currentSignedInUser === commentUsername &&
+                      <AiOutlineEdit className="edit-comment-btn me-3" onClick={event => handleCommentEdit(event)}/>
                     }
-                  </span>
-                  <span className="user-comment">{userComment}</span>
-                  {currentSignedInUser === commentUsername &&
-                    <AiOutlineEdit className="edit-comment-btn me-3" onClick={event => handleCommentEdit(event)}/>
-                  }
-                </li>
-              )
-            })}
-          </ul>
-        </div>
-        <Form onSubmit={event => handleCommentSubmission(event)}>
-          <FormGroup className="form-group-comment">
-            <InputGroup>
-              <Input
-                id="comment-input"
-                name="comment-input"
-                type="text"
-                innerRef={userCommentNode}
-                placeholder="Add a comment…"
-                autoComplete="off"
-                autoFocus
-                onChange={event => setUserComment(event.target.value)}
-              />    
-              <Button 
-                className="post-comment-btn"
-                style={{cursor: userComment.length ? "pointer" : "default"}}
-              >
-                <AiOutlineSend 
-                  className="icon"
-                  style={{ 
-                    color: userComment.length ? "rgba(0, 0, 0, 1)" : "rgba(0, 0, 0, 0.5)",
-                  }}
-                />
-              </Button>
-            </InputGroup> 
-          </FormGroup>
-        </Form>
-      </div> 
-    </div>,
+                  </li>
+                )
+              })}
+            </ul>
+          </div>
+          <Form onSubmit={event => handleCommentSubmission(event)}>
+            <FormGroup className="form-group-comment">
+              <InputGroup>
+                <Input
+                  id="comment-input"
+                  name="comment-input"
+                  type="text"
+                  innerRef={userCommentNode}
+                  placeholder="Add a comment…"
+                  autoComplete="off"
+                  autoFocus
+                  onChange={event => setUserComment(event.target.value)}
+                />    
+                <Button 
+                  className="post-comment-btn"
+                  style={{cursor: userComment.length ? "pointer" : "default"}}
+                >
+                  <AiOutlineSend 
+                    className="icon"
+                    style={{ 
+                      color: userComment.length ? "rgba(0, 0, 0, 1)" : "rgba(0, 0, 0, 0.5)",
+                    }}
+                  />
+                </Button>
+              </InputGroup> 
+            </FormGroup>
+          </Form>
+        </div> 
+      </div>
+    </section>,
     document.getElementById("comments-modal")
   );
 }

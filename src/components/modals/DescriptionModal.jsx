@@ -2,25 +2,31 @@ import { createPortal } from "react-dom";
 
 import { CloseButton } from "reactstrap";
 
+import { useCloseModalByKey } from "../../customHooks";
+
 
 const DescriptionModal = ({ movieReqDescDetails: { name, description }, descriptionModalTextNode, closeDescriptionModal }) => {
 
+  useCloseModalByKey(closeDescriptionModal);
+  
   return createPortal(
-    <div 
-      className="the-description-modal overlay" 
-      onClick={event => closeDescriptionModal(event)}
-    >
-      <CloseButton 
-        className="close-modal-btn"
-        variant="white"
-        onClick={event => closeDescriptionModal(event)}
-      />
-      <div ref={descriptionModalTextNode} className="content">
-        <h3>{name}</h3>
-        <hr/>
-        <p>{description}</p>
+    <section>
+      <div 
+        className="the-description-modal overlay" 
+        onClick={closeDescriptionModal}
+      >
+        <CloseButton 
+          className="close-modal-btn"
+          variant="white"
+          onClick={closeDescriptionModal}
+        />
+        <div ref={descriptionModalTextNode} className="content">
+          <h3>{name}</h3>
+          <hr/>
+          <p>{description}</p>
+        </div>
       </div>
-    </div>,
+    </section>,
     document.getElementById("description-modal")
   );
 }
