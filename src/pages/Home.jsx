@@ -8,7 +8,7 @@ import { loadMovies } from "../redux/usersMovies";
 
 import { useQuery } from "react-query";
 
-import MoviesGridView from "../components/MoviesGridView";
+import Modals from "../components/Modals";
 import { fetchMovies, setUsersDataLocally } from "../functions";
 import { DEFAULT_USER } from "../constants";
 
@@ -90,10 +90,14 @@ const Home = () => {
 
   return (
     <section>
-      <MoviesGridView movies={movies}/>
+      <Modals moviesToGrid={movies}/>
       <Row className="mt-4">
         <Col className="regenerate-col">
-          <Button className="regenerate-btn btn-bg-color" block onClick={regenerateMovies}>
+          <Button 
+            className="regenerate-btn btn-bg-color" 
+            block 
+            onClick={regenerateMovies}
+          >
             Regenerate Movies
           </Button>
         </Col>

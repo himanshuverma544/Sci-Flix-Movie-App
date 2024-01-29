@@ -21,8 +21,10 @@ import { useState, useEffect, useCallback } from "react";
 
 import { useQuery } from "react-query";
 
-import MoviesGridView from"../components/MoviesGridView";
+import Modals from "../components/Modals";
+
 import { fetchMovies } from "../functions";
+
 import { 
   DEFAULT_DROPDOWN_TOGGLE_TEXT, 
   SORT_OPTIONS, 
@@ -99,8 +101,8 @@ const Movies = () => {
   }, [movies]);
 
 
-  return ( 
-    <Container>
+  return (
+    <section> 
       <Row>
         <Col sm={6}>
           <Form className="search-movies-filter" onClick={event => event.preventDefault()}>
@@ -162,8 +164,8 @@ const Movies = () => {
           </Form>
         </Col>
       </Row>
-      <MoviesGridView movies={sortedMovies}/>
-    </Container>
+      <Modals moviesToGrid={sortedMovies}/>
+    </section>
   );
 }
 
