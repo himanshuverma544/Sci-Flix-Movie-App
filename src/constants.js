@@ -66,11 +66,13 @@ const SORT_OPTIONS = [
   {title: "Release Date", value: "release_date"}
 ];
 
-const MILLISECONDS_PER_DAY = 24 * 60 * 60 * 1000;
-const CNAME_SIGNED_IN_USER = "signedInUser";
-
 const DEFAULT_TEXT_COLOR = "#000";
 const PLACEHOLDER_TEXT_COLOR = "#6e6b6b";
+
+const MODAL_CLOSE_KEY = "Escape";
+
+const MILLISECONDS_PER_DAY = 24 * 60 * 60 * 1000;
+const CNAME_SIGNED_IN_USER = "signedInUser";
 
 
 export {
@@ -88,8 +90,9 @@ export {
   EDIT_COMMENT,
   DEFAULT_DROPDOWN_TOGGLE_TEXT, 
   SORT_OPTIONS, 
+  DEFAULT_TEXT_COLOR,
+  PLACEHOLDER_TEXT_COLOR,
+  MODAL_CLOSE_KEY,
   MILLISECONDS_PER_DAY,
   CNAME_SIGNED_IN_USER,
-  DEFAULT_TEXT_COLOR,
-  PLACEHOLDER_TEXT_COLOR
 };
