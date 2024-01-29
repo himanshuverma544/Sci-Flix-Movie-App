@@ -143,67 +143,69 @@ const Authentication = () => {
 
   
   return (
-    <Container className="auth-form-cont">
-      <Form className="auth-form" onSubmit={handleSubmit}>
-        <h1 className="form-heading">
-          {`${AS_PER[status].heading} ${isAuthenticated() ?
-            capitalizeUsername(signedInUser) :
-            ""
-          }`}
-        </h1>
-        <hr/>
-        {!isAuthenticated() &&
-          <>
-            <FormGroup>
-              <Input
-                id="username"
-                innerRef={usernameNode}
-                name="username"
-                placeholder="Enter Username"
-                type="text"
-                autoComplete="off"
-              />
-            </FormGroup>
-            <FormGroup>
-              <Input
-                id="password"
-                innerRef={passwordNode}
-                name="password"
-                placeholder="Enter Password"
-                type="password"
-              />
-            </FormGroup>
-            {AS_PER[status].show && 
+    <section>
+      <div className="auth-form-cont">
+        <Form className="auth-form" onSubmit={handleSubmit}>
+          <h1 className="form-heading">
+            {`${AS_PER[status].heading} ${isAuthenticated() ?
+              capitalizeUsername(signedInUser) :
+              ""
+            }`}
+          </h1>
+          <hr/>
+          {!isAuthenticated() &&
+            <>
               <FormGroup>
                 <Input
-                  id="confirm-password"
-                  innerRef={confirmPasswordNode}
-                  name="confirm-password"
-                  placeholder="Confirm Password"
+                  id="username"
+                  innerRef={usernameNode}
+                  name="username"
+                  placeholder="Enter Username"
+                  type="text"
+                  autoComplete="off"
+                />
+              </FormGroup>
+              <FormGroup>
+                <Input
+                  id="password"
+                  innerRef={passwordNode}
+                  name="password"
+                  placeholder="Enter Password"
                   type="password"
                 />
               </FormGroup>
-            }
-          </>
-        }
-        <Button className="btn-bg-color">
-          {AS_PER[status].name}
-        </Button>
-        <hr/>
-        <FormText>
-          {AS_PER[status].switchMsg}
-          {!isAuthenticated() &&
-            <Button 
-              className="auth-switch-btn"
-              color="link"
-              onClick={() => setStatus(AS_PER[status].switchTitle)}
-            >
-              {AS_PER[status].switchTitle}
-            </Button>
+              {AS_PER[status].show && 
+                <FormGroup>
+                  <Input
+                    id="confirm-password"
+                    innerRef={confirmPasswordNode}
+                    name="confirm-password"
+                    placeholder="Confirm Password"
+                    type="password"
+                  />
+                </FormGroup>
+              }
+            </>
           }
-        </FormText>
-      </Form>
-    </Container>
+          <Button className="btn-bg-color">
+            {AS_PER[status].name}
+          </Button>
+          <hr/>
+          <FormText>
+            {AS_PER[status].switchMsg}
+            {!isAuthenticated() &&
+              <Button 
+                className="auth-switch-btn"
+                color="link"
+                onClick={() => setStatus(AS_PER[status].switchTitle)}
+              >
+                {AS_PER[status].switchTitle}
+              </Button>
+            }
+          </FormText>
+        </Form>
+      </div>
+    </section>
   );
 }
 
