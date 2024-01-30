@@ -48,6 +48,7 @@ const DeleteModal = ({ movieReqDeletingDetails: { signedInUser, id, name }, dele
         />
         <div ref={deleteModalDeleteNode} className="confirm-box">
           <h3>{name}</h3>
+          <hr/>
           <p className="mt-3">Are you sure you want to delete this movie?</p>
           <div className="confirm-btn-group mt-3">
             <Button className="yes-btn btn-bg-color me-5" onClick={handleBtnYes}>Yes</Button>
