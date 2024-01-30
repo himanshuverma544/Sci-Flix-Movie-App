@@ -245,22 +245,15 @@ footer {
 /* SIGN IN Page */
 
 .auth-form-cont {
-  /* min-height: calc(100dvh - 80.8px - 80px); where, 80.8px and 80px are the heights of the header and footer respectively */
-  /* @media (max-width: 425px) {
-    height: calc(135.5dvh - 80.8px - 80px);
-  } */
+  height: 70dvh;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: center; 
 }
 
 .auth-form {
-  /* width: 437px;
-  max-width: calc(100% - (2 * calc(1.5625vw + 30px))); */
-  /* max-width: 500px;
-  width: 95%; */
-  /* max-height: 80dvh; */
-  /* height: 110dvw; */
+  max-width: 450px;
+  width: 95%;
   display: flex;
   flex-direction: column;
   text-align: center;
