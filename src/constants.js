@@ -8,9 +8,9 @@ const HOME = {
   pathname: "/"
 };
 
-const MOVIES = {
-  title: "Movies",
-  pathname: "/all-movies-list"
+const PREFERENCES = {
+  title: "Preferences",
+  pathname: "/preferences"
 };
 
 const AUTHENTICATION = {
@@ -78,7 +78,7 @@ const CNAME_SIGNED_IN_USER = "signedInUser";
 export {
   DEFAULT_USER, 
   HOME, 
-  MOVIES, 
+  PREFERENCES, 
   AUTHENTICATION, 
   PAGE404,
   SIGN_IN,

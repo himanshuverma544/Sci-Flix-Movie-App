@@ -1,27 +1,42 @@
-import { Row, Col, Button } from "reactstrap";
-import { toast } from "react-toastify";
+import { 
+  Row, 
+  Col, 
+  Form, 
+  FormGroup, 
+  InputGroup, 
+  Input, 
+  Dropdown, 
+  DropdownToggle, 
+  DropdownMenu, 
+  DropdownItem, 
+  Button
+} 
+from "reactstrap";
 
-import { useEffect, useCallback } from "react";
+import { AiOutlineSearch } from "react-icons/ai";
+import { BiSortAlt2 } from "react-icons/bi";
 
-import { useDispatch, useSelector } from "react-redux";
-import { loadMovies } from "../redux/usersMovies";
+import { useState, useEffect, useCallback } from "react";
 
 import { useQuery } from "react-query";
 
 import Modals from "../components/Modals";
-import { fetchMovies, setUsersDataLocally } from "../functions";
-import { DEFAULT_USER } from "../constants";
 
+import { fetchMovies } from "../functions";
+
+import { 
+  DEFAULT_DROPDOWN_TOGGLE_TEXT, 
+  SORT_OPTIONS, 
+  DEFAULT_TEXT_COLOR, 
+  PLACEHOLDER_TEXT_COLOR 
+} 
+from "../constants";
 
 
 const Home = () => {
 
-  const userMovieDispatch = useDispatch();
-
-  const { users: existingUsers, signedInUser } = useSelector(state => state.usersReducer);
-
   const { 
-    data: moviesData, 
+    data: movies, 
     isSuccess 
   } = 
   useQuery({
@@ -29,79 +44,126 @@ const Home = () => {
     queryFn: fetchMovies
   });
 
-  const movies = useSelector(state => state.usersMoviesReducer[signedInUser] ?? []); 
 
+  const [sortedMovies, setSortedMovies] = useState([]);
 
-  useEffect(() => {
-
-    function storeUsersLocally() {
-
-      localStorage.setItem("users", JSON.stringify(existingUsers));
-    }
-    storeUsersLocally();
-
-  }, [existingUsers]);
-
+  const [dropdown, setDropdown] = useState({
+    toggleText: DEFAULT_DROPDOWN_TOGGLE_TEXT,
+    openStatus: false
+  });
 
   useEffect(() => {
-    
-    async function loadMoviesInRedux() {
+
+    if (isSuccess) {
       
-      const userMoviesLocal = localStorage.getItem(signedInUser);
-
-      userMovieDispatch(
-        loadMovies({
-          username: signedInUser,
-          movies: userMoviesLocal ? JSON.parse(userMoviesLocal) : (isSuccess ? moviesData : [])
-        })
-      );
+      function loadMoviesInitially() {
+        setSortedMovies(movies);
+      }
+      loadMoviesInitially();
     }
-      
-    loadMoviesInRedux();
-      
-  }, [signedInUser, isSuccess, moviesData, userMovieDispatch]);
-    
+  }, [isSuccess, movies]);
 
-  const isSignedInUser = useCallback(() => signedInUser !== DEFAULT_USER.username, [signedInUser]);
+  const handleSortOrder = useCallback(() => 
+    setSortedMovies(prev => [...prev].reverse())
+  , []);
 
-  useEffect(() => {
-    if (isSignedInUser()) {
-      setUsersDataLocally(signedInUser, movies);
-    }
-  }, [signedInUser, movies, isSignedInUser]);
+  const toggleOpenStatus = useCallback(() =>
+    setDropdown(prev => {
+      return {...prev, openStatus: !prev.openStatus}
+    })
+  , []);
+
+  const selectedDropdownItem = useCallback(sortByTitle => 
+    setDropdown(prev => {
+      return {...prev, toggleText: sortByTitle}
+    })
+  , []);
+
+  const handleSortBy = useCallback((sortByTitle, sortByValue) => {
+    selectedDropdownItem(sortByTitle);
+    setSortedMovies(prev => [...prev].sort((a, b) =>
+      a[sortByValue] < b[sortByValue] ? -1 : (a[sortByValue] > b[sortByValue] ? 1 : 0)
+    ));
+  }
+  , [selectedDropdownItem]);
 
 
-  /* Regenerate Movies */
+  const handleSearch = useCallback(searchedKeyword => {
 
-  const regenerateMovies = useCallback(async () => {
+    const matchedMovies = movies.filter(
+      movie => movie.name.toLowerCase().includes(searchedKeyword) 
+            || movie.description.toLowerCase().includes(searchedKeyword)
+    );
 
-    if (isSignedInUser()) {
-      userMovieDispatch(
-        loadMovies({
-          username: signedInUser,
-          movies: moviesData
-        })
-      );
-      toast("Regenerated Movies", { type: "success" });
-    }
+    setSortedMovies(matchedMovies);
 
-  }, [signedInUser, moviesData, isSignedInUser, userMovieDispatch]);
+  }, [movies]);
 
 
   return (
-    <section>
-      <Modals moviesToGrid={movies}/>
-      <Row className="mt-4">
-        <Col className="regenerate-col">
-          <Button 
-            className="regenerate-btn btn-bg-color" 
-            block 
-            onClick={regenerateMovies}
-          >
-            Regenerate Movies
-          </Button>
+    <section> 
+      <Row>
+        <Col sm={6}>
+          <Form className="search-movies-filter" onClick={event => event.preventDefault()}>
+            <FormGroup className="search-movies-group">
+              <InputGroup>
+                <Input
+                  id="search-movies"
+                  name="search-movies"
+                  type="text"
+                  placeholder="Search Movies"
+                  autoComplete="off"
+                  onChange={event => handleSearch(event.target.value.toLowerCase())}
+                />
+                <Button className="search-movies-btn btn-bg-color" type="submit">
+                  <AiOutlineSearch/>
+                </Button>
+              </InputGroup>
+            </FormGroup>
+          </Form>
+        </Col>
+        <Col sm={6}>
+          <Form className="sort-by-filter">
+            <FormGroup className="sort-by-group">
+              <InputGroup className="select-input-group">
+                <Dropdown isOpen={dropdown.openStatus} toggle={toggleOpenStatus}>
+                  <DropdownToggle 
+                    className="sort-by-dropdown" 
+                    style={{ color: (DEFAULT_DROPDOWN_TOGGLE_TEXT === dropdown.toggleText) ?
+                      PLACEHOLDER_TEXT_COLOR : 
+                      DEFAULT_TEXT_COLOR
+                    }} 
+                    caret
+                  >
+                    {dropdown.toggleText}
+                  </DropdownToggle>
+                  <DropdownMenu className="sort-by-dropdown-menu">
+                    {SORT_OPTIONS.map((option, index) => (
+                      <DropdownItem 
+                        key={index} 
+                        className="py-2" 
+                        onClick={event => 
+                          handleSortBy(event.target.innerText, option.value)
+                        }
+                      >
+                        {option.title}
+                      </DropdownItem>
+                    ))}
+                  </DropdownMenu>
+                </Dropdown>
+              </InputGroup>
+              <Button 
+                className="sort-order-btn ms-3 btn-bg-color" 
+                type="button"
+                onClick={handleSortOrder}
+              >
+                <BiSortAlt2/>
+              </Button>
+            </FormGroup>            
+          </Form>
         </Col>
       </Row>
+      <Modals moviesToGrid={sortedMovies}/>
     </section>
   );
 }

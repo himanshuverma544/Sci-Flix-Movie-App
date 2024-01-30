@@ -41,7 +41,7 @@
 /* SmartNavLink */
 
 @media (max-width: 575px) {
-  :is(.home-icon, .movies-icon, .auth-icon) {
+  :is(.home-icon, .preferences-icon, .auth-icon) {
     font-size: 1.4rem;
   }
 }

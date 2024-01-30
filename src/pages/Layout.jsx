@@ -4,14 +4,14 @@ import { useSelector } from "react-redux";
 import { Container } from "reactstrap";
 
 import { HiOutlineHome } from "react-icons/hi2";
-import { BiCameraMovie } from "react-icons/bi";
+import { LiaHeart } from "react-icons/lia";
 import { FiUser } from "react-icons/fi";
 
 import { ToastContainer } from "react-toastify";
 
 import SmartNavLink from "../components/SmartNavLink";
 
-import { HOME, MOVIES, AUTHENTICATION, DEFAULT_USER } from "../constants";
+import { HOME, PREFERENCES, AUTHENTICATION, DEFAULT_USER } from "../constants";
 
 
 const Layout = () => {
@@ -31,9 +31,9 @@ const Layout = () => {
                   title={HOME.title}
                 />    
                 <SmartNavLink
-                  path={MOVIES.pathname}
-                  icon={<BiCameraMovie className="movies-icon"/>}
-                  title={MOVIES.title}
+                  path={PREFERENCES.pathname}
+                  icon={<LiaHeart className="preferences-icon"/>}
+                  title={PREFERENCES.title}
                 />
                 <SmartNavLink 
                   path={AUTHENTICATION.pathname}

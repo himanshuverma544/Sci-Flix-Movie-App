@@ -13,7 +13,7 @@ import { useLocation } from "react-router-dom";
 
 import { formatDate } from "../functions";
 
-import { HOME, MOVIES } from "../constants";
+import { HOME, PREFERENCES } from "../constants";
 
 
 const MoviesGridView = 
@@ -75,7 +75,7 @@ const MoviesGridView =
                 >
                   Read Description
                 </Button>
-                { pathname === MOVIES.pathname &&
+                { pathname === HOME.pathname &&
                 <Button 
                   className="comment-btn mt-2" 
                   block
@@ -88,7 +88,7 @@ const MoviesGridView =
                   Comment
                 </Button>
                 }
-                { pathname === HOME.pathname && 
+                { pathname === PREFERENCES.pathname && 
                   <div className="btn-gp mt-2">
                     <Button 
                       className="edit-rating-btn" 
