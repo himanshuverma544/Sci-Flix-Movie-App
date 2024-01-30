@@ -187,7 +187,7 @@ const Authentication = () => {
               }
             </>
           }
-          <Button className="btn-bg-color">
+          <Button className="btn-bg-color" block>
             {AS_PER[status].name}
           </Button>
           <hr/>
