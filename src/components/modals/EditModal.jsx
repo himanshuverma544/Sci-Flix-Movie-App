@@ -52,6 +52,7 @@ const EditModal = ({ movieReqRatingDetails: { signedInUser: currentSignedInUser,
         <div ref={editModalRatingNode} className="user-rating-form-container">
           <Form onSubmit={event => handleEdit(event)}>
             <h3 className="mb-3">{name}</h3>
+            <hr/>
             <FormGroup className="form-group">
               <Label for="user-rating-label">
                 Give your Rating
@@ -67,7 +68,7 @@ const EditModal = ({ movieReqRatingDetails: { signedInUser: currentSignedInUser,
                 autoFocus
               />
             </FormGroup>
-            <Button className="btn-bg-color mt-2">
+            <Button className="btn-bg-color mt-2" block>
               Submit
             </Button>
           </Form>
