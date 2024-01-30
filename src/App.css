@@ -254,8 +254,6 @@ footer {
 .auth-form {
   max-width: 450px;
   width: 95%;
-  display: flex;
-  flex-direction: column;
   text-align: center;
   padding: calc(1.5625vw + 30px);
   border-radius: 10px;
