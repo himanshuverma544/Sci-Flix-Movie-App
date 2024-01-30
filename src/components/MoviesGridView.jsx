@@ -1,5 +1,14 @@
-import { Row, Col, Card, CardBody, CardTitle, CardText, Button } from "reactstrap";
-import { AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
+import { 
+  Row, 
+  Col, 
+  Card, 
+  CardBody, 
+  CardTitle, 
+  CardText, 
+  ButtonGroup, 
+  Button 
+} 
+from "reactstrap";
 
 import { useLocation } from "react-router-dom";
 
@@ -35,27 +44,6 @@ const MoviesGridView =
                 alt: movie.name
               })}
             >
-              { pathname === HOME.pathname && 
-                <div className="actions-on-movie"> 
-                  <AiOutlineEdit 
-                    className="edit-movie me-2" 
-                    onClick={event => getMovieReqRatingDetails(event, {
-                      signedInUser,
-                      id: movie.id,
-                      name: movie.name,
-                      rating: movie.rating,
-                    })}
-                  />
-                  <AiOutlineDelete 
-                    className="delete-movie" 
-                    onClick={event => getMovieReqDeletingDetails(event, {
-                      signedInUser,
-                      id: movie.id,
-                      name: movie.name,
-                    })}
-                  />
-                </div>
-              } 
               <img src={movie.thumbnail} alt={movie.name}/>
             </div>
             <CardBody className="movie-card-body">
@@ -89,18 +77,45 @@ const MoviesGridView =
                   Read Description
                 </Button>
                 { pathname === MOVIES.pathname &&
-                  <Button 
-                    className="comment-btn mt-2" 
-                    block
-                    color="dark"
-                    onClick={() => getMovieCommentsReqDetails({
-                      signedInUser,
-                      movieName: movie.name,
-                    })}
-                  >
-                    Comment
-                  </Button>
+                <Button 
+                  className="comment-btn mt-2" 
+                  block
+                  color="dark"
+                  onClick={() => getMovieCommentsReqDetails({
+                    signedInUser,
+                    movieName: movie.name,
+                  })}
+                >
+                  Comment
+                </Button>
                 }
+                { pathname === HOME.pathname && 
+                  <div className="btn-gp mt-2">
+                    <Button 
+                      className="edit-rating-btn" 
+                      color="dark"
+                      onClick={event => getMovieReqRatingDetails(event, {
+                        signedInUser,
+                        id: movie.id,
+                        name: movie.name,
+                        rating: movie.rating,
+                      })}
+                    >
+                      Rate
+                    </Button>
+                    <Button 
+                      className="del-btn" 
+                      color="dark"
+                      onClick={event => getMovieReqDeletingDetails(event, {
+                        signedInUser,
+                        id: movie.id,
+                        name: movie.name,
+                      })}
+                    >
+                      Delete
+                    </Button>
+                  </div>
+                } 
               </div>
             </CardBody>
           </Card>
