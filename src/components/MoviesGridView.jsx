@@ -39,11 +39,11 @@ const MoviesGridView =
             <div 
               className="movie-img-container"
               onClick={() => getMovieImage({
-                url: movie.thumbnail,
+                url: movie.images.portrait,
                 alt: movie.name
               })}
             >
-              <img src={movie.thumbnail} alt={movie.name}/>
+              <img src={movie.images.portrait} alt={movie.name}/>
             </div>
             <CardBody className="movie-card-body">
               <CardTitle className="movie-name">
