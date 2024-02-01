@@ -75,6 +75,30 @@ footer {
 
 /* HOME */
 
+/* Carousel */
+
+.movie-carousel {
+
+  & .carousel-inner {
+    height: 60vh;
+    border: 3px solid #000;
+
+    & .carousel-item {
+      position: relative;
+      height: 0;
+      padding-top: 60vh;
+      overflow: hidden;
+
+      & img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+}
 
 /* Movies Cards */
 
@@ -234,7 +258,7 @@ footer {
 /* AUTHENTICATION (SIGN IN) Page */
 
 .auth-form-cont {
-  height: 70dvh;
+  height: calc(100dvh - 80.8px - 80px);  /* subtracting the heights of the header and footer respectively */
   display: flex;
   justify-content: center;
   align-items: center; 
