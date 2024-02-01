@@ -3,13 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { useState, useRef, useCallback } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
-import { signUp, signIn, signOut } from "../redux/users";
-import { addNewUser } from "../redux/usersMovies";
+import { signUp, signIn, signOut } from "../redux/slices/users";
+import { addNewUser } from "../redux/slices/usersMovies";
 
 import { Container, Form, FormGroup, Input, Button, FormText } from "reactstrap";
 import { toast } from "react-toastify";
 
-import { capitalizeUsername, setCustomCookie, clearCustomCookie } from "../functions";
+import { capitalizeUsername, setCustomCookie, clearCustomCookie } from "../utils/functions";
 
 import { 
   DEFAULT_USER, 
@@ -19,7 +19,7 @@ import {
   AS_PER, 
   CNAME_SIGNED_IN_USER 
 } 
-from "../constants";
+from "../utils/constants";
 
 
 const Authentication = () => {
@@ -144,7 +144,7 @@ const Authentication = () => {
   
   return (
     <section>
-      <div className="auth-form-cont">
+      <Container className="auth-form-cont gx-0" fluid>
         <Form className="auth-form" onSubmit={handleSubmit}>
           <h1 className="form-heading">
             {`${AS_PER[status].heading} ${isAuthenticated() ?
@@ -204,7 +204,7 @@ const Authentication = () => {
             }
           </FormText>
         </Form>
-      </div>
+      </Container>
     </section>
   );
 }
