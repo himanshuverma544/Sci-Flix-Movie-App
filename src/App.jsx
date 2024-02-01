@@ -10,7 +10,7 @@ import Preferences from './pages/Preferences';
 import Page404 from './pages/Page404';
 import Authentication from './pages/Authentication';
 
-import { HOME, PREFERENCES, AUTHENTICATION, PAGE404 } from './constants';
+import { HOME, PREFERENCES, AUTHENTICATION, PAGE404 } from './utils/constants';
 
 
 function App() {

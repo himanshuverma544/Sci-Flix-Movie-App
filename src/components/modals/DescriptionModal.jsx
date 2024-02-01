@@ -2,7 +2,7 @@ import { createPortal } from "react-dom";
 
 import { CloseButton } from "reactstrap";
 
-import { useCloseModalByKey } from "../../customHooks";
+import { useCloseModalByKey } from "../../utils/customHooks";
 
 
 const DescriptionModal = ({ movieReqDescDetails: { name, description }, descriptionModalTextNode, closeDescriptionModal }) => {

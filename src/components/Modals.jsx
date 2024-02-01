@@ -14,7 +14,7 @@ import EditModal from "./modals/EditModal";
 import DeleteModal from "./modals/DeleteModal";
 import CommentsModal from "./modals/CommentsModal";
 
-import { DEFAULT_USER, AUTHENTICATION } from "../constants";
+import { DEFAULT_USER, AUTHENTICATION } from "../utils/constants";
 
 
 const Modals = ({moviesToGrid}) => {

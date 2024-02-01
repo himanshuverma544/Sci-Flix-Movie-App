@@ -11,9 +11,8 @@ from "reactstrap";
 
 import { useLocation } from "react-router-dom";
 
-import { formatDate } from "../functions";
-
-import { HOME, PREFERENCES } from "../constants";
+import { formatDate } from "../utils/functions";
+import { HOME, PREFERENCES } from "../utils/constants";
 
 
 const MoviesGridView = 
