@@ -1,7 +1,7 @@
-import dataReducer from "./globalData/reducer";
+import dataReducer from "./reducer";
 import { useReducer } from "react";
 
-import { homeContext as HomeContext } from "./globalData/context";
+import { homeContext as HomeContext } from "./context";
 
 
 const initialState = {
