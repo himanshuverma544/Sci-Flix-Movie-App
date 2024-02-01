@@ -1,16 +1,17 @@
-import { Row, Col, Button } from "reactstrap";
+import { Container, Row, Col, Button } from "reactstrap";
 import { toast } from "react-toastify";
 
 import { useEffect, useCallback } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
-import { loadMovies } from "../redux/usersMovies";
+import { loadMovies } from "../redux/slices/usersMovies";
 
 import { useQuery } from "react-query";
 
 import Modals from "../components/Modals";
-import { fetchMovies, setUsersDataLocally } from "../functions";
-import { DEFAULT_USER } from "../constants";
+import VerticalSpacer from "../components/VerticalSpacer";
+import { fetchMovies, setUsersDataLocally } from "../utils/functions";
+import { DEFAULT_USER } from "../utils/constants";
 
 
 const Preferences = () => {
@@ -88,20 +89,32 @@ const Preferences = () => {
 
 
   return (
-    <section>
-      <Modals moviesToGrid={movies}/>
-      <Row className="mt-4">
-        <Col className="regenerate-col">
-          <Button 
-            className="regenerate-btn btn-bg-color" 
-            block 
-            onClick={regenerateMovies}
-          >
-            Regenerate Movies
-          </Button>
-        </Col>
-      </Row>
-    </section>
+    <>
+      <section>
+        <VerticalSpacer p="3" m="2"/>
+      </section>
+
+      <section>
+        <Container>
+          <Modals moviesToGrid={movies}/>
+          <Row className="mt-4">
+            <Col className="regenerate-col">
+              <Button 
+                className="regenerate-btn btn-bg-color" 
+                block 
+                onClick={regenerateMovies}
+              >
+                Regenerate Movies
+              </Button>
+            </Col>
+          </Row>
+        </Container>
+      </section>
+
+      <section>
+        <VerticalSpacer p="3" m="2"/>
+      </section>
+    </>
   );
 }
 
