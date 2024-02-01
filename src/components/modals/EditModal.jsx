@@ -5,9 +5,9 @@ import { createPortal } from "react-dom";
 import { useRef, useCallback } from "react";
 
 import { useDispatch } from "react-redux";
-import { editMovie } from "../../redux/usersMovies";
+import { editMovie } from "../../redux/slices/usersMovies";
 
-import { useCloseModalByKey } from "../../customHooks";
+import { useCloseModalByKey } from "../../utils/customHooks";
 
 
 const EditModal = ({ movieReqRatingDetails: { signedInUser: currentSignedInUser, id, name, rating}, editModalRatingNode, closeEditModal }) => {

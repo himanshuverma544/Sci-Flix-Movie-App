@@ -5,9 +5,9 @@ import { createPortal } from "react-dom";
 import { useCallback } from "react";
 
 import { useDispatch } from "react-redux";
-import { deleteMovie } from "../../redux/usersMovies";
+import { deleteMovie } from "../../redux/slices/usersMovies";
 
-import { useCloseModalByKey } from "../../customHooks";
+import { useCloseModalByKey } from "../../utils/customHooks";
 
 
 const DeleteModal = ({ movieReqDeletingDetails: { signedInUser, id, name }, deleteModalDeleteNode, closeDeleteModal }) => {

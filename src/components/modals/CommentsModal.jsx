@@ -8,11 +8,11 @@ import { Form, FormGroup, InputGroup, Input, Button, CloseButton } from "reactst
 import { AiOutlineEdit, AiOutlineSend } from "react-icons/ai";
 
 import { useDispatch, useSelector } from "react-redux";
-import { addComment, editComment } from "../../redux/moviesComments";
+import { addComment, editComment } from "../../redux/slices/moviesComments";
 
-import { useCloseModalByKey } from "../../customHooks";
-import { reverseVal, capitalizeUsername } from "../../functions";
-import { DEFAULT_USER, REPRESENTING_YOU, ADD_COMMENT, EDIT_COMMENT } from "../../constants";
+import { useCloseModalByKey } from "../../utils/customHooks";
+import { reverseVal, capitalizeUsername } from "../../utils/functions";
+import { DEFAULT_USER, REPRESENTING_YOU, ADD_COMMENT, EDIT_COMMENT } from "../../utils/constants";
 
 
 
