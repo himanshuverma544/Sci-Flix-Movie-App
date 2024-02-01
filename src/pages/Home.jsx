@@ -1,4 +1,5 @@
 import { 
+  Container,
   Row, 
   Col, 
   Form, 
@@ -20,9 +21,11 @@ import { useState, useEffect, useCallback } from "react";
 
 import { useQuery } from "react-query";
 
+import TheCarousel from "../components/TheCarousel";
+import VerticalSpacer from "../components/VerticalSpacer";
 import Modals from "../components/Modals";
 
-import { fetchMovies } from "../functions";
+import { fetchMovies } from "../utils/functions";
 
 import { 
   DEFAULT_DROPDOWN_TOGGLE_TEXT, 
@@ -30,7 +33,7 @@ import {
   DEFAULT_TEXT_COLOR, 
   PLACEHOLDER_TEXT_COLOR 
 } 
-from "../constants";
+from "../utils/constants";
 
 
 const Home = () => {
@@ -101,70 +104,93 @@ const Home = () => {
 
 
   return (
-    <section> 
-      <Row>
-        <Col sm={6}>
-          <Form className="search-movies-filter" onClick={event => event.preventDefault()}>
-            <FormGroup className="search-movies-group">
-              <InputGroup>
-                <Input
-                  id="search-movies"
-                  name="search-movies"
-                  type="text"
-                  placeholder="Search Movies"
-                  autoComplete="off"
-                  onChange={event => handleSearch(event.target.value.toLowerCase())}
-                />
-                <Button className="search-movies-btn btn-bg-color" type="submit">
-                  <AiOutlineSearch/>
-                </Button>
-              </InputGroup>
-            </FormGroup>
-          </Form>
-        </Col>
-        <Col sm={6}>
-          <Form className="sort-by-filter">
-            <FormGroup className="sort-by-group">
-              <InputGroup className="select-input-group">
-                <Dropdown isOpen={dropdown.openStatus} toggle={toggleOpenStatus}>
-                  <DropdownToggle 
-                    className="sort-by-dropdown" 
-                    style={{ color: (DEFAULT_DROPDOWN_TOGGLE_TEXT === dropdown.toggleText) ?
-                      PLACEHOLDER_TEXT_COLOR : 
-                      DEFAULT_TEXT_COLOR
-                    }} 
-                    caret
-                  >
-                    {dropdown.toggleText}
-                  </DropdownToggle>
-                  <DropdownMenu className="sort-by-dropdown-menu">
-                    {SORT_OPTIONS.map((option, index) => (
-                      <DropdownItem 
-                        key={index} 
-                        className="py-2" 
-                        onClick={event => 
-                          handleSortBy(event.target.innerText, option.value)
-                        }
+    <>
+      <section>
+        <Container className="gx-0" fluid> 
+          <Row>
+            <Col>
+              <TheCarousel items={isSuccess ? movies : []}/>
+            </Col>
+          </Row>
+        </Container>
+      </section>
+
+      <section>
+        <VerticalSpacer p="3" m="2"/>
+      </section>
+
+      <section>
+        <Container>
+          <Row>
+            <Col sm={6}>
+              <Form className="search-movies-filter" onClick={event => event.preventDefault()}>
+                <FormGroup className="search-movies-group">
+                  <InputGroup>
+                    <Input
+                      id="search-movies"
+                      name="search-movies"
+                      type="text"
+                      placeholder="Search Movies"
+                      autoComplete="off"
+                      onChange={event => handleSearch(event.target.value.toLowerCase())}
+                    />
+                    <Button className="search-movies-btn btn-bg-color" type="submit">
+                      <AiOutlineSearch/>
+                    </Button>
+                  </InputGroup>
+                </FormGroup>
+              </Form>
+            </Col>
+            <Col sm={6}>
+              <Form className="sort-by-filter">
+                <FormGroup className="sort-by-group">
+                  <InputGroup className="select-input-group">
+                    <Dropdown isOpen={dropdown.openStatus} toggle={toggleOpenStatus}>
+                      <DropdownToggle 
+                        className="sort-by-dropdown" 
+                        style={{ 
+                          color: (DEFAULT_DROPDOWN_TOGGLE_TEXT === dropdown.toggleText) ?
+                          PLACEHOLDER_TEXT_COLOR : 
+                          DEFAULT_TEXT_COLOR
+                        }} 
+                        caret
                       >
-                        {option.title}
-                      </DropdownItem>
-                    ))}
-                  </DropdownMenu>
-                </Dropdown>
-              </InputGroup>
-              <Button 
-                className="sort-order-btn ms-3 btn-bg-color" 
-                type="button"
-                onClick={handleSortOrder}
-              >
-                <BiSortAlt2/>
-              </Button>
-            </FormGroup>            
-          </Form>
-        </Col>
-      </Row>
-      <Modals moviesToGrid={sortedMovies}/>
-    </section>
+                        {dropdown.toggleText}
+                      </DropdownToggle>
+                      <DropdownMenu className="sort-by-dropdown-menu">
+                        {SORT_OPTIONS.map((option, index) => (
+                          <DropdownItem 
+                            key={index} 
+                            className="py-2" 
+                            onClick={event => 
+                              handleSortBy(event.target.innerText, option.value)
+                            }
+                          >
+                            {option.title}
+                          </DropdownItem>
+                        ))}
+                      </DropdownMenu>
+                    </Dropdown>
+                  </InputGroup>
+                  <Button 
+                    className="sort-order-btn ms-3 btn-bg-color" 
+                    type="button"
+                    onClick={handleSortOrder}
+                  >
+                    <BiSortAlt2/>
+                  </Button>
+                </FormGroup>            
+              </Form>
+            </Col>
+          </Row>
+          <Modals moviesToGrid={sortedMovies}/>
+        </Container>
+      </section>
+
+      <section>
+        <VerticalSpacer p="3" m="2"/>
+      </section>
+    </>
   );
 }
 
