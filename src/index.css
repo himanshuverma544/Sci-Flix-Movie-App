@@ -9,7 +9,7 @@ a {
   text-decoration: none !important;
 }
 
-.master-cont {
+#root {
   display: grid;
   grid-template-rows: auto 1fr auto;
   min-height: 100dvh;
