@@ -1,7 +1,6 @@
 import { Outlet } from "react-router-dom";
-import { useSelector } from "react-redux";
 
-import { Container } from "reactstrap";
+import { useSelector } from "react-redux";
 
 import { HiOutlineHome } from "react-icons/hi2";
 import { LiaHeart } from "react-icons/lia";
@@ -11,7 +10,7 @@ import { ToastContainer } from "react-toastify";
 
 import SmartNavLink from "../components/SmartNavLink";
 
-import { HOME, PREFERENCES, AUTHENTICATION, DEFAULT_USER } from "../constants";
+import { HOME, PREFERENCES, AUTHENTICATION, DEFAULT_USER } from "../utils/constants";
 
 
 const Layout = () => {
@@ -20,49 +19,41 @@ const Layout = () => {
 
   return (
     <>
-      <Container className="master-cont gx-0" fluid>
-        <Container className="header-cont gx-0" fluid>
-          <header>
-            <nav className="movie-app-navbar">
-              <ul>
-                <SmartNavLink
-                  path={HOME.pathname}
-                  icon={<HiOutlineHome className="home-icon"/>}
-                  title={HOME.title}
-                />    
-                <SmartNavLink
-                  path={PREFERENCES.pathname}
-                  icon={<LiaHeart className="preferences-icon"/>}
-                  title={PREFERENCES.title}
-                />
-                <SmartNavLink 
-                  path={AUTHENTICATION.pathname}
-                  icon={<FiUser className="auth-icon"/>}
-                  title={ signedInUser === DEFAULT_USER.username ? 
-                    AUTHENTICATION.signInTitle : 
-                    AUTHENTICATION.signOutTitle
-                  }
-                />             
-              </ul>
-            </nav>
-          </header>
-        </Container>
+      <header>
+        <nav className="movie-app-navbar">
+          <ul>
+            <SmartNavLink
+              path={HOME.pathname}
+              icon={<HiOutlineHome className="home-icon"/>}
+              title={HOME.title}
+            />    
+            <SmartNavLink
+              path={PREFERENCES.pathname}
+              icon={<LiaHeart className="preferences-icon"/>}
+              title={PREFERENCES.title}
+            />
+            <SmartNavLink 
+              path={AUTHENTICATION.pathname}
+              icon={<FiUser className="auth-icon"/>}
+              title={ signedInUser === DEFAULT_USER.username ? 
+                AUTHENTICATION.signInTitle : 
+                AUTHENTICATION.signOutTitle
+              }
+            />             
+          </ul>
+        </nav>
+      </header>
 
-        <Container className="main-cont my-5">
-          <main>
-            <Outlet/>
-          </main>
-          <ToastContainer position="bottom-left"/>
-        </Container>
-        
-        <Container className="footer-cont gx-0" fluid>
-          <footer>
-            Popular Science Fiction Movies
-          </footer>
-        </Container>
-      </Container>
+      <main>
+        <Outlet/>
+        <ToastContainer position="bottom-left"/>
+      </main>
+    
+      <footer>
+        Popular Science Fiction Movies
+      </footer>
     </>
-  )
+  );
 }
 
 export default Layout;
