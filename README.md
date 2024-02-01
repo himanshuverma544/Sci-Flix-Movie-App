@@ -10,6 +10,10 @@ Developed a user-friendly Movie App with React/Redux, delivering an immersive br
 - React
 - Redux
 
+# UI Libraries Used
+- Reactstrap
+- Bootstrap
+
 # API Used
 - Hosted Mock API for popular science fiction movies using <a href="https://www.npoint.io/" target="_blank">npoint.io</a>
 
@@ -21,14 +25,12 @@ Developed a user-friendly Movie App with React/Redux, delivering an immersive br
 - axios
 - reactstrap
 - bootstrap
-- react-select
 - react-icons
-- react-toastify
 - uuid
 - gh-pages
 
 # Module Bundler
-- Webpack
+- Vite
 
 # Deployed On
 - GitHub Pages
