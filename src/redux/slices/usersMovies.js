@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { DEFAULT_USER } from "../constants";
+import { DEFAULT_USER } from "../../utils/constants";
 
 
 const usersMoviesSlice = createSlice({
