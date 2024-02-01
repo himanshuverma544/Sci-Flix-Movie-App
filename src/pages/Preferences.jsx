@@ -95,7 +95,7 @@ const Preferences = () => {
       </section>
 
       <section>
-        <Container>
+        <Container className="gx-0">
           <Modals moviesToGrid={movies}/>
           <Row className="mt-4">
             <Col className="regenerate-col">

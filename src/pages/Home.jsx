@@ -107,7 +107,7 @@ const Home = () => {
     <>
       <section>
         <Container className="gx-0" fluid> 
-          <Row>
+          <Row className="gx-0">
             <Col>
               <TheCarousel items={isSuccess ? movies : []}/>
             </Col>
@@ -120,7 +120,7 @@ const Home = () => {
       </section>
 
       <section>
-        <Container>
+        <Container className="gx-0">
           <Row>
             <Col sm={6}>
               <Form className="search-movies-filter" onClick={event => event.preventDefault()}>
