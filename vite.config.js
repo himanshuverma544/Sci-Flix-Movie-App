@@ -5,6 +5,9 @@ import eslint from 'vite-plugin-eslint';
 
 
 export default defineConfig({
+
+  base: "/Sci-Flix-Movie-App/",
+
   plugins: [
     react(),
 
