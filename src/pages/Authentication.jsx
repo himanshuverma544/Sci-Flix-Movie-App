@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 import { useState, useRef, useCallback } from "react";
 
@@ -13,11 +13,13 @@ import { capitalizeUsername, setCustomCookie, clearCustomCookie } from "../utils
 
 import { 
   DEFAULT_USER, 
+  HOME,
   SIGN_IN, 
   SIGN_UP, 
   SIGN_OUT, 
   AS_PER, 
-  CNAME_SIGNED_IN_USER 
+  CNAME_SIGNED_IN_USER,
+  PREFERENCES,
 } 
 from "../utils/constants";
 
@@ -25,6 +27,7 @@ from "../utils/constants";
 const Authentication = () => {
 
   const navigate = useNavigate();
+  const location = useLocation();
 
   const userMovieDispatch = useDispatch();
   const userDispatch = userMovieDispatch;
@@ -95,7 +98,13 @@ const Authentication = () => {
 
           toast("Signed Up Successfully", {type: "success"});
           setStatus(SIGN_OUT.name);
-          navigate("/");
+         
+          if (location.state === PREFERENCES.pathname) {
+            navigate(PREFERENCES.pathname);
+          }
+          else {
+            navigate(HOME.pathname);
+          }
         }
         break;
 
@@ -122,7 +131,13 @@ const Authentication = () => {
 
             toast("Signed In Successfully", {type: "success"});
             setStatus(SIGN_OUT.name);
-            navigate("/");
+
+            if (location.state === PREFERENCES.pathname) {
+              navigate(PREFERENCES.pathname);
+            }
+            else {
+              navigate(HOME.pathname);
+            }
           }
         }
         break;
@@ -139,7 +154,7 @@ const Authentication = () => {
         break;
     }
     
-  }, [status, getUser, userMovieDispatch, userDispatch, navigate]);
+  }, [status, location, getUser, userMovieDispatch, userDispatch, navigate]);
 
   
   return (

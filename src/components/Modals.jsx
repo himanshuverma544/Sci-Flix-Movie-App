@@ -14,7 +14,7 @@ import EditModal from "./modals/EditModal";
 import DeleteModal from "./modals/DeleteModal";
 import CommentsModal from "./modals/CommentsModal";
 
-import { DEFAULT_USER, AUTHENTICATION } from "../utils/constants";
+import { DEFAULT_USER, AUTHENTICATION, PREFERENCES } from "../utils/constants";
 
 
 const Modals = ({moviesToGrid}) => {
@@ -45,7 +45,7 @@ const Modals = ({moviesToGrid}) => {
 
     const navigateToAuthenticationPage = useCallback(() => {
 
-      navigate(AUTHENTICATION.pathname);
+      navigate(AUTHENTICATION.pathname, { state: PREFERENCES.pathname });
       toast("You need to Sign In first to make changes", {type: "info"});
   
     }, [navigate]);
