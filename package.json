@@ -1,9 +1,9 @@
 {
-  "name": "movie-app",
+  "name": "sci-flix-movie-app",
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "homepage": "https://himanshuverma544.github.io/Movie-App",
+  "homepage": "https://himanshuverma544.github.io/Sci-Flix-Movie-App/",
   "scripts": {
     "dev": "vite",
     "debug": "vite --debug",
