@@ -6,28 +6,26 @@ Developed a user-friendly Movie App with React/Redux, delivering an immersive br
 - Developed editing, deletion, and commenting features for interactive user experience.
 - Enhanced UX with advanced searching and sorting by name, rating, and release date.
 
-# Technology Used
+# Technology
 - React
-- Redux
+  
+# API Used
+- Hosted Mock API for popular science fiction movies using <a href="https://www.npoint.io/" target="_blank">npoint.io</a>.
 
 # UI Libraries Used
 - Reactstrap
 - Bootstrap
 
-# API Used
-- Hosted Mock API for popular science fiction movies using <a href="https://www.npoint.io/" target="_blank">npoint.io</a>.
+# State Management Libraries
+- Redux
+- Redux Toolkit
 
-# Libraries Used
-- react-redux
-- @reduxjs/toolkit
-- react-router-dom
-- react-query
-- axios
-- reactstrap
-- bootstrap
-- react-icons
-- uuid
-- gh-pages
+# Rest of the Required Libraries
+- React Router DOM
+- React Query
+- Axios
+- UUID
+- GitHub Pages
 
 # Module Bundler
 - Vite
