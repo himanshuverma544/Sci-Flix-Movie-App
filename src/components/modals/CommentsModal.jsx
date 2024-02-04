@@ -169,14 +169,14 @@ const CommentsModal = ({commentReqDetails: { signedInUser: currentSignedInUser ,
                     </span>
                     <span className="user-comment">{userComment}</span>
                     {currentSignedInUser === commentUsername &&
-                      <AiOutlineEdit className="edit-comment-btn me-3" onClick={event => handleCommentEdit(event)}/>
+                      <AiOutlineEdit className="edit-comment-btn me-3" onClick={handleCommentEdit}/>
                     }
                   </li>
                 )
               })}
             </ul>
           </div>
-          <Form onSubmit={event => handleCommentSubmission(event)}>
+          <Form onSubmit={handleCommentSubmission}>
             <FormGroup className="form-group-comment">
               <InputGroup>
                 <Input
@@ -186,7 +186,6 @@ const CommentsModal = ({commentReqDetails: { signedInUser: currentSignedInUser ,
                   innerRef={userCommentNode}
                   placeholder="Add a comment…"
                   autoComplete="off"
-                  autoFocus
                   onChange={event => setUserComment(event.target.value)}
                 />    
                 <Button 
