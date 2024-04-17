@@ -32,4 +32,3 @@ Developed a user-friendly Movie App with React/Redux, delivering an immersive br
 
 # Deployed On
 - GitHub Pages
-
