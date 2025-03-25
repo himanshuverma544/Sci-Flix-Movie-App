@@ -34,4 +34,5 @@ Developed a user-friendly Movie App with React/Redux, delivering an immersive br
 - GitHub Pages
 
 # Given By
-- [Resolve AI](https://www.rezolve.ai/) 
+- [Resolve AI](https://www.rezolve.ai/)
+- [Babvip](https://babvipdevelopers.com/)
